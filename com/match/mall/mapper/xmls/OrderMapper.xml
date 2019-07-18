@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.mall.mapper.OrderMapper">
+	<select id="count" parameterType="Map" resultType="Integer">
+		select count(*) from orders
+		<where>
+			<if test="code != null and code != ''">
+				code = #{code}
+			</if>
+			<if test="membername != null and membername != ''">
+				and membername like '%${membername}%'
+			</if>
+			<if test="begin != null  and end != null ">
+				and ordertime between #{begin} and #{end}
+			</if>
+			<if test="cargo>=0">
+				and cargo = #{cargo}
+			</if>
+		</where>
+	</select>
+
+	<select id="getorderList" parameterType="Map" resultType="Map">
+		select * from orders
+		<where>
+			<if test="code != null and code != ''">
+				code = #{code}
+			</if>
+			<if test="membername != null and membername != ''">
+				and membername like '%${membername}%'
+			</if>
+			<if test="begin != null  and end != null">
+				and ordertime between #{begin} and #{end}
+			</if>
+			<if test="cargo>=0">
+				and cargo = #{cargo}
+			</if>
+		</where>
+		limit ${page*pagesize},#{pagesize}
+	</select>
+
+	<select id="getorderDetail" parameterType="java.lang.Long"
+		resultType="Map">
+		select orderdetail.orderId,orderdetail.num, goods.* from
+		orderdetail left join goods on orderdetail.goodsId = goods.id where
+		orderdetail.orderId = #{orderid}
+	</select>
+
+	<update id="sendOut" parameterType="java.lang.Long">
+		update orders set cargo = 2
+		where id=#{orderid}
+	</update>
+
+</mapper>

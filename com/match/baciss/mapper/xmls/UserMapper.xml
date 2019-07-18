@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.baciss.mapper.UserMapper">
+	<resultMap id="BaseResultMap"
+		type="com.match.baciss.model.User">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="creator" jdbcType="BIGINT" property="creator" />
+		<result column="modifier" jdbcType="BIGINT" property="modifier" />
+		<result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+		<result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+		<result column="enterpriseid" jdbcType="BIGINT"
+			property="enterpriseid" />
+		<result column="username" jdbcType="VARCHAR"
+			property="username" />
+		<result column="password" jdbcType="VARCHAR"
+			property="password" />
+		<result column="email" jdbcType="VARCHAR" property="email" />
+		<result column="qq" jdbcType="INTEGER" property="qq" />
+		<result column="weixin" jdbcType="VARCHAR" property="weixin" />
+		<result column="phone" jdbcType="INTEGER" property="phone" />
+		<result column="realName" jdbcType="VARCHAR"
+			property="realname" />
+		<result column="cardType" jdbcType="INTEGER"
+			property="cardtype" />
+		<result column="cardID" jdbcType="INTEGER" property="cardid" />
+		<result column="birth" jdbcType="VARCHAR" property="birth" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<result column="leader" jdbcType="INTEGER" property="leader" />
+		<result column="manager" jdbcType="INTEGER" property="manager" />
+		<result column="worker" jdbcType="INTEGER" property="worker" />
+		<result column="handImg" jdbcType="INTEGER" property="handimg" />
+		<result column="logins" jdbcType="INTEGER" property="logins" />
+		<result column="lastLogin" jdbcType="TIMESTAMP"
+			property="lastlogin" />
+		<result column="photo" jdbcType="VARCHAR" property="photo" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, creator, modifier, ctime, mtime, enterpriseid,
+		username, password,
+		email, qq,
+		weixin, phone, realName, cardType,
+		cardID, birth, type, leader, manager,
+		worker,
+		handImg, logins,
+		lastLogin, photo
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from user
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.match.baciss.model.User">
+		insert into user (id, creator,
+		modifier,
+		ctime, mtime, enterpriseid,
+		username, password, email,
+		qq,
+		weixin, phone,
+		realName, cardType, cardID,
+		birth, type, leader,
+		manager,
+		worker, handImg,
+		logins, lastLogin, photo
+		)
+		values
+		(#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT},
+		#{modifier,jdbcType=BIGINT},
+		#{ctime,jdbcType=TIMESTAMP},
+		#{mtime,jdbcType=TIMESTAMP}, #{enterpriseid,jdbcType=BIGINT},
+		#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{qq,jdbcType=INTEGER},
+		#{weixin,jdbcType=VARCHAR}, #{phone,jdbcType=INTEGER},
+		#{realname,jdbcType=VARCHAR}, #{cardtype,jdbcType=INTEGER},
+		#{cardid,jdbcType=INTEGER},
+		#{birth,jdbcType=VARCHAR},
+		#{type,jdbcType=INTEGER}, #{leader,jdbcType=INTEGER},
+		#{manager,jdbcType=INTEGER}, #{worker,jdbcType=INTEGER},
+		#{handimg,jdbcType=INTEGER},
+		#{logins,jdbcType=INTEGER},
+		#{lastlogin,jdbcType=TIMESTAMP}, #{photo,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="addUser" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.match.baciss.model.User">
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="modifier != null">
+				modifier,
+			</if>
+			<if test="ctime != null">
+				ctime,
+			</if>
+			<if test="mtime != null">
+				mtime,
+			</if>
+			<if test="enterpriseid != null">
+				enterpriseid,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="qq != null">
+				qq,
+			</if>
+			<if test="weixin != null">
+				weixin,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="realname != null">
+				realName,
+			</if>
+			<if test="cardtype != null">
+				cardType,
+			</if>
+			<if test="cardid != null">
+				cardID,
+			</if>
+			<if test="birth != null">
+				birth,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="leader != null">
+				leader,
+			</if>
+			<if test="manager != null">
+				manager,
+			</if>
+			<if test="worker != null">
+				worker,
+			</if>
+			<if test="handimg != null">
+				handImg,
+			</if>
+			<if test="logins != null">
+				logins,
+			</if>
+			<if test="lastlogin != null">
+				lastLogin,
+			</if>
+			<if test="photo != null">
+				photo,
+			</if>
+			<if test="isperfect != null">
+				isperfect,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="zhifubao !=null">
+				zhifubao,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=BIGINT},
+			</if>
+			<if test="modifier != null">
+				#{modifier,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				#{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				#{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enterpriseid != null">
+				#{enterpriseid,jdbcType=BIGINT},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="qq != null">
+				#{qq,jdbcType=INTEGER},
+			</if>
+			<if test="weixin != null">
+				#{weixin,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=INTEGER},
+			</if>
+			<if test="realname != null">
+				#{realname,jdbcType=VARCHAR},
+			</if>
+			<if test="cardtype != null">
+				#{cardtype,jdbcType=INTEGER},
+			</if>
+			<if test="cardid != null">
+				#{cardid,jdbcType=INTEGER},
+			</if>
+			<if test="birth != null">
+				#{birth,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="leader != null">
+				#{leader,jdbcType=INTEGER},
+			</if>
+			<if test="manager != null">
+				#{manager,jdbcType=INTEGER},
+			</if>
+			<if test="worker != null">
+				#{worker,jdbcType=INTEGER},
+			</if>
+			<if test="handimg != null">
+				#{handimg,jdbcType=INTEGER},
+			</if>
+			<if test="logins != null">
+				#{logins,jdbcType=INTEGER},
+			</if>
+			<if test="lastlogin != null">
+				#{lastlogin,jdbcType=TIMESTAMP},
+			</if>
+			<if test="photo != null">
+				#{photo,jdbcType=VARCHAR},
+			</if>
+			<if test="isperfect != null">
+				#{isperfect,jdbcType=INTEGER},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=INTEGER},
+			</if>
+			<if test="zhifubao != null">
+				#{zhifubao,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateUser"
+		parameterType="com.match.baciss.model.User">
+		update user
+		<set>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=BIGINT},
+			</if>
+			<if test="modifier != null">
+				modifier = #{modifier,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enterpriseid != null">
+				enterpriseid = #{enterpriseid,jdbcType=BIGINT},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="qq != null">
+				qq = #{qq,jdbcType=INTEGER},
+			</if>
+			<if test="weixin != null">
+				weixin = #{weixin,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=INTEGER},
+			</if>
+			<if test="realname != null">
+				realName = #{realname,jdbcType=VARCHAR},
+			</if>
+			<if test="cardtype != null">
+				cardType = #{cardtype,jdbcType=INTEGER},
+			</if>
+			<if test="cardid != null">
+				cardID = #{cardid,jdbcType=INTEGER},
+			</if>
+			<if test="birth != null">
+				birth = #{birth,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="leader != null">
+				leader = #{leader,jdbcType=INTEGER},
+			</if>
+			<if test="manager != null">
+				manager = #{manager,jdbcType=INTEGER},
+			</if>
+			<if test="worker != null">
+				worker = #{worker,jdbcType=INTEGER},
+			</if>
+			<if test="handimg != null">
+				handImg = #{handimg,jdbcType=INTEGER},
+			</if>
+			<if test="logins != null">
+				logins = #{logins,jdbcType=INTEGER},
+			</if>
+			<if test="lastlogin != null">
+				lastLogin = #{lastlogin,jdbcType=TIMESTAMP},
+			</if>
+			<if test="photo != null">
+				photo = #{photo,jdbcType=VARCHAR},
+			</if>
+			<if test="isperfect != null">
+				isperfect = #{isperfect,jdbcType=INTEGER},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=INTEGER},
+			</if>
+			<if test="zhifubao != null">
+				zhifubao = #{zhifubao,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.match.baciss.model.User">
+		update user
+		set creator = #{creator,jdbcType=BIGINT},
+		modifier = #{modifier,jdbcType=BIGINT},
+		ctime =
+		#{ctime,jdbcType=TIMESTAMP},
+		mtime = #{mtime,jdbcType=TIMESTAMP},
+		enterpriseid = #{enterpriseid,jdbcType=BIGINT},
+		username =
+		#{username,jdbcType=VARCHAR},
+		password = #{password,jdbcType=VARCHAR},
+		email = #{email,jdbcType=VARCHAR},
+		qq = #{qq,jdbcType=INTEGER},
+		weixin =
+		#{weixin,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=INTEGER},
+		realName
+		= #{realname,jdbcType=VARCHAR},
+		cardType =
+		#{cardtype,jdbcType=INTEGER},
+		cardID = #{cardid,jdbcType=INTEGER},
+		birth = #{birth,jdbcType=VARCHAR},
+		type = #{type,jdbcType=INTEGER},
+		leader = #{leader,jdbcType=INTEGER},
+		manager =
+		#{manager,jdbcType=INTEGER},
+		worker = #{worker,jdbcType=INTEGER},
+		handImg = #{handimg,jdbcType=INTEGER},
+		logins =
+		#{logins,jdbcType=INTEGER},
+		lastLogin =
+		#{lastlogin,jdbcType=TIMESTAMP},
+		photo = #{photo,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="findmember" parameterType="java.lang.Long"
+		resultType="Map">
+		select
+		realName,a.id,username,phone,c.name as rolename,c.id as roleid
+		from user a left join userrole b on a.id=b.userid left join role c on b.roleid=c.id
+		where a.id = #{id}
+	</select>
+
+	<select id="findmemberpage" parameterType="Map" resultType="Map">
+		select a.*,b.name as entername,d.name as rolename,d.id as roleid from user a left join enterprise b on
+		a.enterpriseid=b.id left join userrole c on a.id=c.userid left join role d on c.roleid=d.id
+		<where>
+			<if test="realName != null and realName != ''">
+				a.realName like '%${realName}%'
+			</if>
+			<if test="phone != null and phone != ''">
+				and a.phone = #{phone}
+			</if>
+		</where>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="count" parameterType="com.match.baciss.model.User"
+		resultType="Integer">
+		select count(*) from user
+		<where>
+			<if test="username!=null and username!=''">
+				username like '%${username}%'
+			</if>
+			<if test="phone!=null and phone!=''">
+				and phone = #{phone}
+			</if>
+		</where>
+	</select>
+	<select id="findUserToPassword" resultType="Map">
+		select password,id from user
+		<where>
+			username = #{username}
+		</where>
+	</select>
+	<select id="findUserExist" parameterType="String"
+		resultType="Map">
+		select id from user
+		<where>
+			username = #{_username}
+		</where>
+	</select>
+
+	<select id="findUserExistByPhone" parameterType="String"
+		resultType="Map">
+		select id from user
+		<where>
+			phone = #{_phone}
+		</where>
+	</select>
+
+	<select id="findTeacherInformatation" 
+		resultType="Map">
+		SELECT
+    	a.birth,
+		a.`realName`,
+		a.`sex`,
+		a.`phone`,
+		b.`education`,
+		a.`cardType`,
+		a.`cardID`,
+		b.position,
+		b.title,
+		a.`qq`,
+		a.`email`,
+		a.`zhifubao`,
+		b.`skilled`,
+		b.`scores`,
+		b.inDate,
+		c.`name`
+		AS collegename,d.`dename` ,a.`id`,b.id as teacherid
+		,b.`college`,e.major,b.`major` AS maid,b.department,b.introduce
+		FROM
+		USER a
+		LEFT JOIN
+		teacher b
+		ON a.id = b.`userid`
+		LEFT JOIN college c ON b.`college`=c.`id`
+		LEFT JOIN Department d ON
+		b.`department`=d.`id` LEFT JOIN DepartMajor e
+		ON b.major=e.id where a.id=#{id}
+	</select>
+
+
+	<select id="findStudentInfomatation" parameterType="Integer"
+		resultType="Map">
+		SELECT
+		a.`username`,
+		a.`realName`,
+		a.`phone`,
+		a.`cardID`,
+		a.`cardType`,
+		a.`isperfect`,
+		a.`email`,
+		a.`qq`,
+		a.`zhifubao`,
+		b.admission,
+		b.`province`,
+		b.`city`,c.`name` AS
+		collegename,d.`dename`,e.`major`,b.`college`,b.`department`,b.`major`
+		AS maid,a.`id`
+		FROM
+		USER a
+		LEFT JOIN student b
+		ON a.id = b.`userid`
+		LEFT JOIN college c ON b.`college`=c.`id` LEFT JOIN Department d ON
+		b.`department`=d.`id` LEFT JOIN departmajor e ON b.`major`=e.`id`
+		where a.id=#{id}
+	</select>
+
+	<select id="findSchoolStaff" parameterType="Map" resultType="Map">
+	 select a.realName,a.phone,a.sex,a.leader,a.id,b.id as teacherid,b.position from user a  left join teacher b on a.id=b.userid where a.enterpriseid=#{enterpriseid} and a.type=6
+	 <if test="realname!=null and realname!=''">
+	  and a.realName like '%${realname}%'
+	 </if>
+	 order by leader desc
+	 limit ${page},#{pagesize}
+	</select>
+	
+	<select id="countfindSchoolStaff" resultType="Integer">
+		 select count(*) from user a  left join teacher b on a.id=b.userid where a.enterpriseid=#{enterpriseid} and a.type=6
+	 <if test="realname!=null and realname!=''">
+	  and a.realName like '%${realname}%'
+	 </if>
+	</select>
+</mapper>

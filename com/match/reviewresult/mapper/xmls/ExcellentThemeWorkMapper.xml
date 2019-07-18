@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.match.reviewresult.mapper.ExcellentThemeWorkMapper">
+	<delete id="deleteExcellentThemeWork"
+		parameterType="java.lang.Long">
+		delete from
+		excellentthemework
+		where id =
+		#{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="addBatchExcellentThemeWork">
+		insert into excellentthemework (mtime,competitionid,workid)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.mtime},#{item.competitionid},#{item.workid})
+		</foreach>
+	</insert>
+
+	<select id="findExcellentThemeWork" parameterType="Map"
+		resultType="Map">
+		SELECT
+		d.name AS
+		typename,c.`stitle`,c.`stwcode`,c.`signupTime`,c.picspath,c.`realname`,c.`phone`,b.id as themeworkid,b.themesignupid,a.id
+		FROM
+		excellentthemework a
+		LEFT JOIN themework b
+		ON a.`workid` = b.id
+		LEFT
+		JOIN themesignup c
+		ON b.themesignupid = c.`id`
+		LEFT JOIN
+		`propositiontype` d
+		ON c.`workType` = d.code
+		where
+		a.competitionid=#{competitionid}
+		order by a.ctime
+		limit 0,#{pagesize}
+	</select>
+
+	<select id="findOtherThemeWork" parameterType="Map"
+		resultType="Map">
+		SELECT
+		c.name as typename,b.`stitle`,b.`stwcode`,b.`signupTime`,b.`realname`,b.`phone`,a.id as workid 
+		FROM
+		themework a
+		LEFT JOIN themesignup b
+		ON a.themesignupid = b.`id`
+		LEFT JOIN `propositiontype` c
+		ON b.`workType` = c.code
+		WHERE NOT EXISTS
+		(SELECT
+		*
+		FROM
+		excellentthemework b
+		WHERE a.id = b.`workid`
+		AND b.`competitionid` =#{competitionid})
+		AND a.competitionid =#{competitionid}
+		<if test="stwcode!=null and stwcode!=''">
+		and b.stwcode=#{stwcode}
+		</if>
+		<if test="code!=null and code!=''">
+		and b.`workType`=#{code}
+		</if>
+		<if test="phone!=null and phone!=''">
+		and b.phone=#{phone}
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+	
+	<select id="countfindOtherThemeWork" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		themework a
+		LEFT JOIN themesignup b
+		ON a.themesignupid = b.`id`
+		LEFT JOIN `propositiontype` c
+		ON b.`workType` = c.code
+		WHERE NOT EXISTS
+		(SELECT
+		*
+		FROM
+		excellentthemework b
+		WHERE a.id = b.`workid`
+		AND b.`competitionid` =#{competitionid})
+		AND a.competitionid =#{competitionid}
+		<if test="stwcode!=null and stwcode!=''">
+		and b.stwcode=#{stwcode}
+		</if>
+		<if test="code!=null and code!=''">
+		and b.`workType`=#{code}
+		</if>
+		<if test="phone!=null and phone!=''">
+		and b.phone=#{phone}
+		</if>
+	</select>
+</mapper>

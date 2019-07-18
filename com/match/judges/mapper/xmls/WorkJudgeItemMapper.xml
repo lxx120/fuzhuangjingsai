@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.judges.mapper.WorkJudgeItemMapper">
+  <resultMap id="BaseResultMap" type="com.match.judges.model.WorkJudgeItem">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="modifier" jdbcType="BIGINT" property="modifier" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="ruleID" jdbcType="BIGINT" property="ruleid" />
+    <result column="score" jdbcType="DOUBLE" property="score" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="workjudgeid" jdbcType="BIGINT" property="workjudgeid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, creator, modifier, ctime, mtime, ruleID, score, note, type, workjudgeid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from workjudgeitem
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from workjudgeitem
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.match.judges.model.WorkJudgeItem">
+    insert into workjudgeitem (id, creator, modifier, 
+      ctime, mtime, ruleID, 
+      score, note, type, workjudgeid
+      )
+    values (#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, #{modifier,jdbcType=BIGINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}, #{ruleid,jdbcType=BIGINT}, 
+      #{score,jdbcType=DOUBLE}, #{note,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{workjudgeid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.match.judges.model.WorkJudgeItem">
+    insert into workjudgeitem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="ruleid != null">
+        ruleID,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="workjudgeid != null">
+        workjudgeid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ruleid != null">
+        #{ruleid,jdbcType=BIGINT},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="workjudgeid != null">
+        #{workjudgeid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.match.judges.model.WorkJudgeItem">
+    update workjudgeitem
+    <set>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ruleid != null">
+        ruleID = #{ruleid,jdbcType=BIGINT},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="workjudgeid != null">
+        workjudgeid = #{workjudgeid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.match.judges.model.WorkJudgeItem">
+    update workjudgeitem
+    set creator = #{creator,jdbcType=BIGINT},
+      modifier = #{modifier,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      ruleID = #{ruleid,jdbcType=BIGINT},
+      score = #{score,jdbcType=DOUBLE},
+      note = #{note,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      workjudgeid = #{workjudgeid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <insert id="addBatchWorkJudgeItem" parameterType="java.util.List">
+         insert into WorkJudgeItem (mtime, ruleID, score,type,workjudgeid) values
+         <foreach collection="list" item="item" index="index" separator=",">
+             (#{item.mtime},
+              #{item.ruleID},
+              #{item.score},
+              #{item.type},
+              #{item.workjudgeid})
+         </foreach>
+ </insert>
+
+</mapper>

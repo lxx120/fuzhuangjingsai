@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.proposition.mapper.IntermatchMapper">
+
+	<insert id="addIntermatch"
+		parameterType="com.match.proposition.model.Intermatch">
+		insert into intermatch
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="ctime != null">
+				ctime,
+			</if>
+			<if test="mtime != null">
+				mtime,
+			</if>
+			<if test="themeworkid != 0">
+				themeworkid,
+			</if>
+			<if test="competitionid != 0">
+				competitionid,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				#{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				#{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="themeworkid != 0">
+				#{themeworkid,jdbcType=BIGINT},
+			</if>
+			<if test="competitionid != 0">
+				#{competitionid,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateIntermatch"
+		parameterType="com.match.proposition.mapper.IntermatchMapper">
+		update intermatch
+		set vote = #{vote}
+		where id =
+		#{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="findfindIntermatch" resultType="Map">
+		SELECT
+		c.`stitle`,
+		c.`picspath`,
+		a.`vote`,
+		b.`id` AS themeworkid,
+		b.`themesignupid`,
+		a.`id`
+		FROM
+		`intermatch` a
+		LEFT JOIN themework b
+		ON a.`themeworkid` = b.`id`
+		LEFT JOIN themesignup c
+		ON b.`themesignupid` = c.`id`
+		where a.`competitionid`=#{competitionid}
+		<if test="code!=null and code!=''">
+		and c.`workType`=#{code}
+		</if>
+		<if test="enterpriseid!=0">
+		and b.`enterpriseid`=#{enterpriseid}
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+	
+	<select id="countfindfindIntermatch" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		`intermatch` a
+		LEFT JOIN themework b
+		ON a.`themeworkid` = b.`id`
+		LEFT JOIN themesignup c
+		ON b.`themesignupid` = c.`id`
+		where a.`competitionid`=#{competitionid}
+		<if test="code!=null">
+		and c.`workType`=#{code}
+		</if>
+		<if test="enterpriseid!=0">
+		and b.`enterpriseid`=#{enterpriseid}
+		</if>
+	</select>
+</mapper>

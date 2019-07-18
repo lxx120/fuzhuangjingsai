@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.match.judges.mapper.WinningPromotionMapper">
+	<resultMap id="BaseResultMap"
+		type="com.match.judges.model.WinningPromotion">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="creator" jdbcType="BIGINT" property="creator" />
+		<result column="modifier" jdbcType="BIGINT" property="modifier" />
+		<result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+		<result column="mtime" jdbcType="BIGINT" property="mtime" />
+		<result column="workid" jdbcType="BIGINT" property="workid" />
+		<result column="competitionid" jdbcType="BIGINT"
+			property="competitionid" />
+		<result column="divisionid" jdbcType="BIGINT"
+			property="divisionid" />
+		<result column="arid" jdbcType="BIGINT" property="arid" />
+		<result column="competitionAprizeid" jdbcType="BIGINT"
+			property="competitionaprizeid" />
+		<result column="finalAprize" jdbcType="BIT"
+			property="finalaprize" />
+		<result column="wptype" jdbcType="INTEGER" property="wptype" />
+		<result column="ranking" jdbcType="INTEGER" property="ranking" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, creator, modifier, ctime, mtime, workid, competitionid, divisionid,
+		arid, competitionAprizeid,
+		finalAprize, wptype, ranking
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from winningpromotion
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from winningpromotion
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"
+		parameterType="com.match.judges.model.WinningPromotion">
+		insert into winningpromotion (id, creator, modifier,
+		ctime, mtime, workid,
+		competitionid, divisionid, arid,
+		competitionAprizeid, finalAprize, wptype,
+		ranking)
+		values (#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT},
+		#{modifier,jdbcType=BIGINT},
+		#{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=BIGINT}, #{workid,jdbcType=BIGINT},
+		#{competitionid,jdbcType=BIGINT}, #{divisionid,jdbcType=BIGINT},
+		#{arid,jdbcType=BIGINT},
+		#{competitionaprizeid,jdbcType=BIGINT}, #{finalaprize,jdbcType=BIT}, #{wptype,jdbcType=INTEGER},
+		#{ranking,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.match.judges.model.WinningPromotion">
+		insert into winningpromotion
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="modifier != null">
+				modifier,
+			</if>
+			<if test="ctime != null">
+				ctime,
+			</if>
+			<if test="mtime != null">
+				mtime,
+			</if>
+			<if test="workid != null">
+				workid,
+			</if>
+			<if test="competitionid != null">
+				competitionid,
+			</if>
+			<if test="divisionid != null">
+				divisionid,
+			</if>
+			<if test="arid != null">
+				arid,
+			</if>
+			<if test="competitionaprizeid != null">
+				competitionAprizeid,
+			</if>
+			<if test="finalaprize != null">
+				finalAprize,
+			</if>
+			<if test="wptype != null">
+				wptype,
+			</if>
+			<if test="ranking != null">
+				ranking,
+			</if>
+			<if test="mark != null">
+				mark,
+			</if>
+			<if test="ptypecode != null">
+				ptypecode,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=BIGINT},
+			</if>
+			<if test="modifier != null">
+				#{modifier,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				#{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				#{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="workid != null">
+				#{workid,jdbcType=BIGINT},
+			</if>
+			<if test="competitionid != null">
+				#{competitionid,jdbcType=BIGINT},
+			</if>
+			<if test="divisionid != null">
+				#{divisionid,jdbcType=BIGINT},
+			</if>
+			<if test="arid != null">
+				#{arid,jdbcType=BIGINT},
+			</if>
+			<if test="competitionaprizeid != null">
+				#{competitionaprizeid,jdbcType=BIGINT},
+			</if>
+			<if test="finalaprize != null">
+				#{finalaprize,jdbcType=BIT},
+			</if>
+			<if test="wptype != null">
+				#{wptype,jdbcType=INTEGER},
+			</if>
+			<if test="ranking != null">
+				#{ranking,jdbcType=INTEGER},
+			</if>
+			<if test="mark != null">
+				#{mark},
+			</if>
+			<if test="ptypecode != null">
+				#{ptypecode},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.match.judges.model.WinningPromotion">
+		update winningpromotion
+		<set>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=BIGINT},
+			</if>
+			<if test="modifier != null">
+				modifier = #{modifier,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="workid != null">
+				workid = #{workid,jdbcType=BIGINT},
+			</if>
+			<if test="competitionid != null">
+				competitionid = #{competitionid,jdbcType=BIGINT},
+			</if>
+			<if test="divisionid != null">
+				divisionid = #{divisionid,jdbcType=BIGINT},
+			</if>
+			<if test="arid != null">
+				arid = #{arid,jdbcType=BIGINT},
+			</if>
+			<if test="competitionaprizeid != null">
+				competitionAprizeid = #{competitionaprizeid,jdbcType=BIGINT},
+			</if>
+			<if test="finalaprize != null">
+				finalAprize = #{finalaprize,jdbcType=BIT},
+			</if>
+			<if test="wptype != null">
+				wptype = #{wptype,jdbcType=INTEGER},
+			</if>
+			<if test="ranking != null">
+				ranking = #{ranking,jdbcType=INTEGER},
+			</if>
+			<if test="mark != null">
+				mark = #{mark},
+			</if>
+			<if test="ptypecode != null">
+				ptypecode = #{ptypecode},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.match.judges.model.WinningPromotion">
+		update winningpromotion
+		set creator = #{creator,jdbcType=BIGINT},
+		modifier = #{modifier,jdbcType=BIGINT},
+		ctime = #{ctime,jdbcType=TIMESTAMP},
+		mtime = #{mtime,jdbcType=BIGINT},
+		workid = #{workid,jdbcType=BIGINT},
+		competitionid = #{competitionid,jdbcType=BIGINT},
+		divisionid = #{divisionid,jdbcType=BIGINT},
+		arid = #{arid,jdbcType=BIGINT},
+		competitionAprizeid = #{competitionaprizeid,jdbcType=BIGINT},
+		finalAprize = #{finalaprize,jdbcType=BIT},
+		wptype = #{wptype,jdbcType=INTEGER},
+		ranking = #{ranking,jdbcType=INTEGER}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+
+	<insert id="addBatchWin" parameterType="java.util.List">
+		insert into winningpromotion (mtime, workid,
+		competitionid,divisionid,arid,competitionAprizeid,wptype,ranking,mark,ptypecode)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.mtime},
+			#{item.workid},
+			#{item.competitionid},
+			#{item.divisionid},
+			#{item.arid},
+			#{item.competitionAprizeid},
+			#{item.wptype},
+			#{item.ranking},
+			#{item.mark},
+			#{item.ptypecode})
+		</foreach>
+	</insert>
+
+	<select id="findWorkList" parameterType="Map" resultType="Map">
+		select workid from winningpromotion where mark=#{mark} and
+		divisionid=#{divisionid} and competitionid=#{competitionid}
+	</select>
+
+	<select id="findWorkList1" resultType="Map">
+		select workid from winningpromotion where competitionid=#{competitionid} and
+		wptype=3
+	</select>
+
+	<select id="findHuoJiangThemeWork" parameterType="Map"
+		resultType="Map">
+		SELECT
+		b.`title`,
+		e.`title` AS themename,
+		d.`stwcode`,
+		f.`realName`,
+		f.`phone`,
+		f.`qq`,
+		f.`email`,b.ctime,
+		g.`realName` AS teacherename,
+		g.`phone` AS teacherphone,
+		g.`email` AS teacheremail,h.`name` AS typename,cc.`name` AS
+		collegename,k.`dename`,c.`name` AS prizename
+		FROM
+		`winningpromotion` a
+		LEFT JOIN `themework` b
+		ON a.`workid` = b.`id`
+		LEFT JOIN `competitionaprize` c
+		ON a.`competitionAprizeid` = c.`id`
+		LEFT JOIN themesignup d
+		ON b.`themesignupid` = d.`id`
+		LEFT JOIN theme e
+		ON d.`themeid` = e.`id`
+		LEFT JOIN USER f
+		ON d.`userid` = f.`id`
+		LEFT JOIN USER g
+		ON d.`teacherphone` = g.`phone`
+		LEFT JOIN `propositiontype` h ON d.`workType`=h.`code`
+		LEFT JOIN student s ON d.`userid`= s.`userid` LEFT JOIN college cc ON
+		s.`college`=cc.`id` LEFT JOIN `department` k ON s.`department`=k.`id`
+		WHERE c.`catype` = 2
+		AND a.`competitionid` = #{competitionid}
+		AND a.`divisionid` = #{divisionid}
+		<if test="code!=null and code!=''">
+		and d.workType = #{code}
+		</if>
+	</select>
+</mapper>

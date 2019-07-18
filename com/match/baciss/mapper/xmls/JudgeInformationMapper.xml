@@ -1,0 +1,878 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.match.baciss.mapper.JudgeInformationMapper">
+	<resultMap id="BaseResultMap"
+		type="com.match.baciss.model.JudgeInformation">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="creator" jdbcType="BIGINT" property="creator" />
+		<result column="modifier" jdbcType="BIGINT" property="modifier" />
+		<result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+		<result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+		<result column="bankname" jdbcType="VARCHAR"
+			property="bankname" />
+		<result column="banknumber" jdbcType="VARCHAR"
+			property="banknumber" />
+		<result column="bankaddress" jdbcType="VARCHAR"
+			property="bankaddress" />
+		<result column="resumeurl" jdbcType="VARCHAR"
+			property="resumeurl" />
+		<result column="skilledCheck" jdbcType="VARCHAR"
+			property="skilledcheck" />
+		<result column="wantCheckTheme" jdbcType="VARCHAR"
+			property="wantchecktheme" />
+		<result column="wantCheckWorksType" jdbcType="VARCHAR"
+			property="wantcheckworkstype" />
+		<result column="userid" jdbcType="BIGINT" property="userid" />
+		<result column="divisionid" jdbcType="BIGINT"
+			property="divisionid" />
+		<result column="levelAccess" jdbcType="INTEGER"
+			property="levelAccess" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, creator, modifier, ctime, mtime, bankname, banknumber,
+		bankaddress,
+		resumeurl,
+		skilledCheck, wantCheckTheme,
+		wantCheckWorksType, userid,divisionid,levelAccess
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from judgeinformation
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		judgeinformation
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"
+		parameterType="com.match.baciss.model.JudgeInformation">
+		insert into judgeinformation (id, creator, modifier,
+		ctime, mtime, bankname,
+		banknumber, bankaddress, resumeurl,
+		skilledCheck, wantCheckTheme, wantCheckWorksType,
+		userid,divisionid,levelAccess)
+		values (#{id,jdbcType=BIGINT},
+		#{creator,jdbcType=BIGINT},
+		#{modifier,jdbcType=BIGINT},
+		#{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP},
+		#{bankname,jdbcType=VARCHAR},
+		#{banknumber,jdbcType=VARCHAR},
+		#{bankaddress,jdbcType=VARCHAR},
+		#{resumeurl,jdbcType=VARCHAR},
+		#{skilledcheck,jdbcType=VARCHAR}, #{wantchecktheme,jdbcType=VARCHAR},
+		#{wantcheckworkstype,jdbcType=VARCHAR},
+		#{userid,jdbcType=BIGINT},#{divisionid,jdbcType=BIGINT},#{levelAccess,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" useGeneratedKeys="true"
+		keyProperty="id"
+		parameterType="com.match.baciss.model.JudgeInformation">
+		insert into judgeinformation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="modifier != null">
+				modifier,
+			</if>
+			<if test="ctime != null">
+				ctime,
+			</if>
+			<if test="mtime != null">
+				mtime,
+			</if>
+			<if test="bankname != null">
+				bankname,
+			</if>
+			<if test="banknumber != null">
+				banknumber,
+			</if>
+			<if test="bankaddress != null">
+				bankaddress,
+			</if>
+			<if test="resumeurl != null">
+				resumeurl,
+			</if>
+			<if test="skilledcheck != null">
+				skilledCheck,
+			</if>
+			<if test="wantchecktheme != null">
+				wantCheckTheme,
+			</if>
+			<if test="wantcheckworkstype != null">
+				wantCheckWorksType,
+			</if>
+			<if test="userid != null">
+				userid,
+			</if>
+			<if test="divisionid!=null">
+				divisionid,
+			</if>
+			<if test="levelAccess!=null">
+				levelAccess,
+			</if>
+			<if test="judgename!=null">
+				judgename,
+			</if>
+			<if test="judgephone!=null">
+				judgephone,
+			</if>
+			<if test="judgetype !=null">
+				judgetype,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=BIGINT},
+			</if>
+			<if test="modifier != null">
+				#{modifier,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				#{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				#{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bankname != null">
+				#{bankname,jdbcType=VARCHAR},
+			</if>
+			<if test="banknumber != null">
+				#{banknumber,jdbcType=VARCHAR},
+			</if>
+			<if test="bankaddress != null">
+				#{bankaddress,jdbcType=VARCHAR},
+			</if>
+			<if test="resumeurl != null">
+				#{resumeurl,jdbcType=VARCHAR},
+			</if>
+			<if test="skilledcheck != null">
+				#{skilledcheck,jdbcType=VARCHAR},
+			</if>
+			<if test="wantchecktheme != null">
+				#{wantchecktheme,jdbcType=VARCHAR},
+			</if>
+			<if test="wantcheckworkstype != null">
+				#{wantcheckworkstype,jdbcType=VARCHAR},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=BIGINT},
+			</if>
+			<if test="divisionid != null">
+				#{divisionid,jdbcType=BIGINT},
+			</if>
+			<if test="levelAccess != null">
+				#{levelAccess,jdbcType=INTEGER},
+			</if>
+			<if test="judgename != null">
+				#{judgename},
+			</if>
+			<if test="judgephone != null">
+				#{judgephone},
+			</if>
+			<if test="judgetype != null">
+				#{judgetype},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.match.baciss.model.JudgeInformation">
+		update judgeinformation
+		<set>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=BIGINT},
+			</if>
+			<if test="modifier != null">
+				modifier = #{modifier,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bankname != null">
+				bankname = #{bankname,jdbcType=VARCHAR},
+			</if>
+			<if test="banknumber != null">
+				banknumber = #{banknumber,jdbcType=VARCHAR},
+			</if>
+			<if test="bankaddress != null">
+				bankaddress = #{bankaddress,jdbcType=VARCHAR},
+			</if>
+			<if test="resumeurl != null">
+				resumeurl = #{resumeurl,jdbcType=VARCHAR},
+			</if>
+			<if test="skilledcheck != null">
+				skilledCheck = #{skilledcheck,jdbcType=VARCHAR},
+			</if>
+			<if test="wantchecktheme != null">
+				wantCheckTheme = #{wantchecktheme,jdbcType=VARCHAR},
+			</if>
+			<if test="wantcheckworkstype != null">
+				wantCheckWorksType =
+				#{wantcheckworkstype,jdbcType=VARCHAR},
+			</if>
+			<if test="userid != null">
+				userid = #{userid,jdbcType=BIGINT},
+			</if>
+			<if test="divisionid != null">
+				divisionid = #{divisionid,jdbcType=BIGINT},
+			</if>
+			<if test="levelAccess != null">
+				levelAccess = #{levelAccess,jdbcType=INTEGER},
+			</if>
+			<if test="judgename != null">
+				judgename = #{judgename},
+			</if>
+			<if test="judgetype !=0">
+				judgetype = #{judgetype}
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.match.baciss.model.JudgeInformation">
+		update judgeinformation
+		set creator =
+		#{creator,jdbcType=BIGINT},
+		modifier = #{modifier,jdbcType=BIGINT},
+		ctime = #{ctime,jdbcType=TIMESTAMP},
+		mtime =
+		#{mtime,jdbcType=TIMESTAMP},
+		bankname = #{bankname,jdbcType=VARCHAR},
+		banknumber = #{banknumber,jdbcType=VARCHAR},
+		bankaddress =
+		#{bankaddress,jdbcType=VARCHAR},
+		resumeurl =
+		#{resumeurl,jdbcType=VARCHAR},
+		skilledCheck =
+		#{skilledcheck,jdbcType=VARCHAR},
+		wantCheckTheme =
+		#{wantchecktheme,jdbcType=VARCHAR},
+		wantCheckWorksType =
+		#{wantcheckworkstype,jdbcType=VARCHAR},
+		userid =
+		#{userid,jdbcType=BIGINT},
+		divisionid = #{divisionid,jdbcType=BIGINT},
+		levelAccess = #{levelAccess,jdbcType=INTEGER},
+
+		where id =
+		#{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="findJudgeIsExist" resultType="Map">
+		select
+		a.id,levelAccess,b.divisionid from JudgeInformation a left join
+		JudgeDivision b on a.id=b.judgeid where judgephone = #{judgephone}
+	</select>
+
+	<select id="findJUdgeInformationPage" parameterType="Map"
+		resultType="Map">
+		SELECT judgename,judgephone,wantCheckTheme,wantCheckWorksType,a.id
+		FROM JudgeInformation a LEFT JOIN JudgeDivision b ON a.id=b.judgeid
+		where b.divisionid=#{divisionid}
+		<if test="judgename !=null and judgename !=''">
+			and judgename like CONCAT('%',#{judgename},'%')
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="count" resultType="Integer">
+		SELECT count(*) FROM JudgeInformation a LEFT JOIN JudgeDivision b ON
+		a.id=b.judgeid where b.divisionid=#{divisionid}
+		<if test="judgename !=null and judgename !=''">
+			and judgename like CONCAT('%',#{judgename},'%')
+		</if>
+	</select>
+
+	<select id="findJudgeInformationById" resultType="Map">
+		SELECT
+		a.levelaccess,a.bankname,a.banknumber,a.bankaddress,a.skilledCheck,b.`name` AS typename,c.`realName`,c.`phone`
+		FROM JudgeInformation a 
+		LEFT JOIN `propositiontype` b ON a.wantCheckTheme=b.`code`
+		LEFT JOIN USER c ON a.`userid`=c.`id`
+		WHERE a.id=#{id}
+	</select>
+
+
+	<select id="findGroupToJUdgeInformationPage" parameterType="Map"
+		resultType="Map">
+		SELECT b.`id`,c.`phone`,c.`realName`,a.name as typename FROM `judgeinformation` b LEFT
+		JOIN USER c ON b.`userid`=c.id
+		LEFT JOIN propositiontype a ON b.wantCheckTheme = a.code
+		 WHERE NOT EXISTS (SELECT a.id FROM
+		`groupteacher` a WHERE groupid=#{groupid} AND a.`teacherid`=b.`id`)
+		and b.judgetype=1
+		<if test="judgename !=null and judgename !=''">
+			and realName like CONCAT('%',#{judgename},'%')
+		</if>
+		order by b.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="Groupcount" resultType="Integer">
+		SELECT count(*) FROM `judgeinformation` b LEFT JOIN USER c ON
+		b.`userid`=c.id WHERE NOT EXISTS (SELECT a.id FROM `groupteacher` a
+		WHERE groupid=#{groupid} AND a.`teacherid`=b.`id`) AND
+		 b.judgetype=1
+		<if test="judgename !=null and judgename !=''">
+			and realName like CONCAT('%',#{judgename},'%')
+		</if>
+	</select>
+
+	<select id="findDivisionGroupToJUdgeInformationPage"
+		parameterType="Map" resultType="Map">
+		SELECT
+		b.`id`,
+		c.`phone`,
+		c.`realName`,a.name as typename
+		FROM
+		`judgedivision` d
+		LEFT JOIN `judgeinformation` b
+		ON d.`judgeid` = b.`id`
+		LEFT JOIN USER c
+		ON b.`userid` = c.id
+		LEFT JOIN propositiontype a ON b.wantCheckTheme = a.code
+		WHERE NOT EXISTS
+		(SELECT
+		a.id
+		FROM
+		`groupteacher` a
+		WHERE groupid = #{groupid}
+		AND a.`teacherid` = b.`id`)
+		AND b.judgetype = 2
+		AND d.`divisionid` = #{diid}
+		<if test="judgename !=null and judgename !=''">
+			and realName like CONCAT('%',#{judgename},'%')
+		</if>
+		UNION
+		SELECT b.`id`,c.`phone`,c.`realName`,a.name as typename FROM judgeinformation b LEFT JOIN USER
+		c ON b.`userid`=c.`id`
+		LEFT JOIN propositiontype a ON b.wantCheckTheme = a.code
+		 WHERE b.`judgetype`=1
+		<if test="judgename !=null and judgename !=''">
+			and realName like CONCAT('%',#{judgename},'%')
+		</if>
+			limit ${page},#{pagesize}
+	</select>
+	
+	<select id="DivisionGroupcount" resultType="Integer">
+	select count(*) from (
+		SELECT
+		b.`id`,
+		c.`phone`,
+		c.`realName`
+		FROM
+		`judgedivision` d
+		LEFT JOIN `judgeinformation` b
+		ON d.`judgeid` = b.`id`
+		LEFT JOIN USER c
+		ON b.`userid` = c.id
+		WHERE NOT EXISTS
+		(SELECT
+		a.id
+		FROM
+		`groupteacher` a
+		WHERE groupid = #{groupid}
+		AND a.`teacherid` = b.`id`)
+		AND b.judgetype = 2
+		AND d.`divisionid` = #{divisionid}
+		<if test="judgename !=null and judgename !=''">
+			and realName like CONCAT('%',#{judgename},'%')
+		</if>
+		UNION
+		SELECT b.`id`,c.`phone`,c.`realName` FROM judgeinformation b LEFT JOIN USER
+		c ON b.`userid`=c.`id` WHERE b.`judgetype`=1
+		<if test="judgename !=null and judgename !=''">
+			and realName like CONCAT('%',#{judgename},'%')
+		</if>
+	) a
+	</select>
+
+	<select id="findManagerNoChooseSchoolJudge" parameterType="Map"
+		resultType="Map">
+		SELECT
+		c.`id`,
+		c.`realName`,
+		b.`name` as orgname,
+		a.position,
+		a.title,c.id
+		as userid
+		FROM
+		teacher a
+		LEFT JOIN college b
+		ON a.`college` = b.`id`
+		LEFT
+		JOIN USER
+		c
+		ON
+		a.`userid` = c.`id`
+		WHERE NOT EXISTS
+		(SELECT
+		d.id
+		FROM
+		JudgeInformation
+		d
+		WHERE d.judgetype = 1 and d.`userid` = a.`userid`)
+		<if test="realname!=null">
+			and c.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and b.name like concat('%',#{name},'%')
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+
+	<select id="countManagerNoChooseSchoolJudge"
+		resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		teacher a
+		LEFT JOIN college b
+		ON a.`college` = b.`id`
+		LEFT JOIN USER
+		c
+		ON
+		a.`userid` = c.`id`
+		WHERE NOT EXISTS
+		(SELECT
+		d.id
+		FROM
+		JudgeInformation
+		d
+		WHERE d.judgetype = 1 and d.`userid` = a.`userid`)
+		<if test="realname!=null">
+			and c.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and b.name like concat('%',#{name},'%')
+		</if>
+	</select>
+
+	<select id="findManagerNoChooseCompanyJudge" parameterType="Map"
+		resultType="Map">
+		SELECT
+		c.`id`,
+		c.`realName`,
+		b.`name` as orgname,
+		a.position,
+		a.title,c.id
+		as userid
+		FROM
+		worker a
+		LEFT JOIN USER c
+		ON a.`userid` = c.`id`
+		LEFT JOIN
+		enterprise
+		b
+		ON
+		c.`enterpriseid`=b.`id`
+		WHERE NOT EXISTS
+		(SELECT
+		d.id
+		FROM
+		JudgeInformation d
+		WHERE d.`userid` = a.`userid` and d.judgetype = 1)
+		<if test="realname!=null">
+			and c.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and b.name like concat('%',#{name},'%')
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="countManagerNoChooseCompanyJudge"
+		resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		worker a
+		LEFT JOIN USER c
+		ON a.`userid` = c.`id`
+		LEFT
+		JOIN enterprise
+		b
+		ON
+		c.`enterpriseid`=b.`id`
+		WHERE NOT EXISTS
+		(SELECT
+		d.id
+		FROM
+		JudgeInformation d
+		WHERE d.`userid` = a.`userid` and d.judgetype =
+		1)
+		<if test="realname!=null">
+			and c.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and b.name like concat('%',#{name},'%')
+		</if>
+	</select>
+
+	<select id="findDivisionNoChooseSchoolJudge" parameterType="Map"
+		resultType="Map">
+		SELECT
+		d.id,a.`title`,a.`userid`,b.`realName`,a.`position`,c.`name` AS
+		orgname,a.`userid`
+		FROM
+		teacher a
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN college c
+		ON a.`college` = c.`id`
+		left join judgeinformation d
+		on d.userid = b.id
+		WHERE c.`id` IN (${pinjie})
+		AND NOT EXISTS
+		(SELECT
+		n.`userid`
+		FROM
+		`judgedivision` z
+		LEFT JOIN
+		judgeinformation n
+		ON
+		z.`judgeid` = n.`id`
+		WHERE z.`divisionid` =
+		#{divisionid} AND
+		a.`userid`=n.`userid`)
+		<if test="realname!=null">
+			and b.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and c.name like concat('%',#{name},'%')
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="countDivisionNoChooseSchoolJudge"
+		resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		teacher a
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT
+		JOIN college c
+		ON a.`college` = c.`id`
+		WHERE c.`id` IN (${pinjie})
+		AND
+		NOT EXISTS
+		(SELECT
+		n.`userid`
+		FROM
+		`judgedivision` z
+		LEFT JOIN
+		judgeinformation n
+		ON z.`judgeid` = n.`id`
+		WHERE z.`divisionid` =
+		#{divisionid} AND a.`userid`=n.`userid`)
+		<if test="realname!=null">
+			and b.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and c.name like concat('%',#{name},'%')
+		</if>
+	</select>
+
+	<select id="findDivisionNoChooseCompanyJudge"
+		parameterType="Map" resultType="Map">
+		SELECT
+		d.id,a.`title`,a.`userid`,b.`realName`,a.`position`,c.`name` AS
+		orgname,a.`userid`
+		FROM
+		worker a
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN enterprise c
+		ON b.`enterpriseid`=c.`id`
+		left join
+		judgeinformation d
+		on d.userid = b.id
+		WHERE c.`id` IN
+		(${pinjie})
+		AND NOT EXISTS
+		(SELECT
+		n.`userid`
+		FROM
+		`judgedivision` z
+		LEFT
+		JOIN judgeinformation n
+		ON
+		z.`judgeid` = n.`id`
+		WHERE z.`divisionid` =
+		#{divisionid} AND
+		a.`userid`=n.`userid`)
+		<if test="realname!=null">
+			and b.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and c.name like concat('%',#{name},'%')
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="countDivisionNoChooseCompanyJudge"
+		resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		worker a
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT
+		JOIN enterprise c
+		ON b.`enterpriseid`=c.`id`
+		WHERE c.`id` IN
+		(${pinjie})
+		AND NOT EXISTS
+		(SELECT
+		n.`userid`
+		FROM
+		`judgedivision` z
+		LEFT
+		JOIN
+		judgeinformation n
+		ON z.`judgeid` = n.`id`
+		WHERE z.`divisionid` =
+		#{divisionid} AND a.`userid`=n.`userid`)
+		<if test="realname!=null">
+			and b.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and c.name like concat('%',#{name},'%')
+		</if>
+	</select>
+
+
+	<select id="findManagerChooseSchoolJudge" parameterType="Map"
+		resultType="Map">
+		SELECT
+		a.`id`,
+		b.`id` AS userid,
+		d.`name` AS orgname,
+		b.`realName`,
+		c.`title`
+		FROM
+		JudgeInformation a
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN teacher c
+		ON b.id = c.`userid`
+		LEFT JOIN college d
+		ON
+		b.`enterpriseid` = d.`id`
+		where a.judgetype = 1
+		<if test="realname!=null">
+			and b.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and d.name like concat('%',#{name},'%')
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="countManagerChooseSchoolJudge" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		JudgeInformation a
+		LEFT JOIN USER b
+		ON a.`userid` =
+		b.`id`
+		LEFT JOIN teacher c
+		ON b.id = c.`userid`
+		LEFT JOIN college d
+		ON
+		b.`enterpriseid` = d.`id`
+		where a.judgetype = 1
+		<if test="realname!=null">
+			and b.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and d.name like concat('%',#{name},'%')
+		</if>
+	</select>
+
+	<select id="findManagerChooseCompanyJudge" parameterType="Map"
+		resultType="Map">
+		SELECT
+		a.`id`,
+		b.`id` AS userid,
+		d.`name` AS orgname,
+		b.`realName`,
+		c.`title`
+		FROM
+		JudgeInformation a
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN teacher c
+		ON b.id = c.`userid`
+		LEFT JOIN enterprise d
+		ON
+		b.`enterpriseid` = d.`id`
+		where a.judgetype = 2
+		<if test="realname!=null">
+			and b.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and d.name like concat('%',#{name},'%')
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="countManagerChooseCompanyJudge" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		JudgeInformation a
+		LEFT JOIN USER b
+		ON a.`userid` =
+		b.`id`
+		LEFT JOIN teacher c
+		ON b.id = c.`userid`
+		LEFT JOIN enterprise d
+		ON
+		b.`enterpriseid` = d.`id`
+		where a.judgetype = 2
+		<if test="realname!=null">
+			and b.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and d.name like concat('%',#{name},'%')
+		</if>
+	</select>
+
+	<select id="findDivisionChooseSchoolJudge" parameterType="Map"
+		resultType="Map">
+		SELECT
+		a.`id`,
+		b.`id` AS userid,
+		d.`name` AS orgname,
+		b.`realName`,
+		c.`title`
+		FROM
+		`judgedivision` e LEFT JOIN
+		JudgeInformation a ON
+		e.`judgeid`=a.`id`
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN
+		teacher c
+		ON b.id = c.`userid`
+		LEFT JOIN college d
+		ON b.`enterpriseid` =
+		d.`id`
+		where a.judgetype = 1 and e.divisionid=#{divisionid}
+		<if test="realname!=null">
+			and b.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and d.name like concat('%',#{name},'%')
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="countDivisionChooseSchoolJudge" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		`judgedivision` e LEFT JOIN
+		JudgeInformation a ON
+		e.`judgeid`=a.`id`
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN
+		teacher c
+		ON b.id = c.`userid`
+		LEFT JOIN college d
+		ON b.`enterpriseid` =
+		d.`id`
+		where a.judgetype = 1 and e.divisionid=#{divisionid}
+		<if test="realname!=null">
+			and b.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and d.name like concat('%',#{name},'%')
+		</if>
+	</select>
+
+	<select id="findDivisionChooseCompanyJudge" parameterType="Map"
+		resultType="Map">
+		SELECT
+		a.`id`,
+		b.`id` AS userid,
+		d.`name` AS orgname,
+		b.`realName`,
+		c.`title`
+		FROM
+		`judgedivision` e LEFT JOIN
+		JudgeInformation a ON
+		e.`judgeid`=a.`id`
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN
+		teacher c
+		ON b.id = c.`userid`
+		LEFT JOIN enterprise d
+		ON b.`enterpriseid`
+		=
+		d.`id`
+		where a.judgetype = 2 and e.divisionid=#{divisionid}
+		<if test="realname!=null">
+			and b.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and d.name like concat('%',#{name},'%')
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="countDivisionChooseCompanyJudge"
+		resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		`judgedivision` e LEFT JOIN
+		JudgeInformation a ON
+		e.`judgeid`=a.`id`
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN
+		teacher c
+		ON b.id = c.`userid`
+		LEFT JOIN enterprise d
+		ON b.`enterpriseid`
+		=
+		d.`id`
+		where a.judgetype = 2 and e.divisionid=#{divisionid}
+		<if test="realname!=null">
+			and b.realname like CONCAT('%',#{realname},'%')
+		</if>
+		<if test="name!=null">
+			and d.name like concat('%',#{name},'%')
+		</if>
+	</select>
+</mapper>

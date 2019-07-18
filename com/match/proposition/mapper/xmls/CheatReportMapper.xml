@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.proposition.mapper.CheatReportMapper">
+  <resultMap id="BaseResultMap" type="com.match.proposition.model.CheatReport">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="modifier" jdbcType="BIGINT" property="modifier" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="themeworkid" jdbcType="BIGINT" property="themeworkid" />
+    <result column="reporterid" jdbcType="BIGINT" property="reporterid" />
+    <result column="fromip" jdbcType="VARCHAR" property="fromip" />
+    <result column="checked" jdbcType="BIT" property="checked" />
+    <result column="checkorid" jdbcType="BIGINT" property="checkorid" />
+    <result column="crtype" jdbcType="INTEGER" property="crtype" />
+    <result column="website" jdbcType="VARCHAR" property="website" />
+    <result column="sysCheck" jdbcType="INTEGER" property="syscheck" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.match.proposition.model.CheatReport">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, creator, modifier, ctime, mtime, themeworkid, reporterid, fromip, checked, checkorid, 
+    crtype, website, sysCheck
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cheatreport
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cheatreport
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.match.proposition.model.CheatReport">
+    insert into cheatreport (id, creator, modifier, 
+      ctime, mtime, themeworkid, 
+      reporterid, fromip, checked, 
+      checkorid, crtype, website, 
+      sysCheck, content)
+    values (#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, #{modifier,jdbcType=BIGINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}, #{themeworkid,jdbcType=BIGINT}, 
+      #{reporterid,jdbcType=BIGINT}, #{fromip,jdbcType=VARCHAR}, #{checked,jdbcType=BIT}, 
+      #{checkorid,jdbcType=BIGINT}, #{crtype,jdbcType=INTEGER}, #{website,jdbcType=VARCHAR}, 
+      #{syscheck,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.match.proposition.model.CheatReport">
+    insert into cheatreport
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="themeworkid != null">
+        themeworkid,
+      </if>
+      <if test="reporterid != null">
+        reporterid,
+      </if>
+      <if test="fromip != null">
+        fromip,
+      </if>
+      <if test="checked != null">
+        checked,
+      </if>
+      <if test="checkorid != null">
+        checkorid,
+      </if>
+      <if test="crtype != null">
+        crtype,
+      </if>
+      <if test="website != null">
+        website,
+      </if>
+      <if test="syscheck != null">
+        sysCheck,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="themeworkid != null">
+        #{themeworkid,jdbcType=BIGINT},
+      </if>
+      <if test="reporterid != null">
+        #{reporterid,jdbcType=BIGINT},
+      </if>
+      <if test="fromip != null">
+        #{fromip,jdbcType=VARCHAR},
+      </if>
+      <if test="checked != null">
+        #{checked,jdbcType=BIT},
+      </if>
+      <if test="checkorid != null">
+        #{checkorid,jdbcType=BIGINT},
+      </if>
+      <if test="crtype != null">
+        #{crtype,jdbcType=INTEGER},
+      </if>
+      <if test="website != null">
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="syscheck != null">
+        #{syscheck,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.match.proposition.model.CheatReport">
+    update cheatreport
+    <set>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="themeworkid != null">
+        themeworkid = #{themeworkid,jdbcType=BIGINT},
+      </if>
+      <if test="reporterid != null">
+        reporterid = #{reporterid,jdbcType=BIGINT},
+      </if>
+      <if test="fromip != null">
+        fromip = #{fromip,jdbcType=VARCHAR},
+      </if>
+      <if test="checked != null">
+        checked = #{checked,jdbcType=BIT},
+      </if>
+      <if test="checkorid != null">
+        checkorid = #{checkorid,jdbcType=BIGINT},
+      </if>
+      <if test="crtype != null">
+        crtype = #{crtype,jdbcType=INTEGER},
+      </if>
+      <if test="website != null">
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="syscheck != null">
+        sysCheck = #{syscheck,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.match.proposition.model.CheatReport">
+    update cheatreport
+    set creator = #{creator,jdbcType=BIGINT},
+      modifier = #{modifier,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      themeworkid = #{themeworkid,jdbcType=BIGINT},
+      reporterid = #{reporterid,jdbcType=BIGINT},
+      fromip = #{fromip,jdbcType=VARCHAR},
+      checked = #{checked,jdbcType=BIT},
+      checkorid = #{checkorid,jdbcType=BIGINT},
+      crtype = #{crtype,jdbcType=INTEGER},
+      website = #{website,jdbcType=VARCHAR},
+      sysCheck = #{syscheck,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.match.proposition.model.CheatReport">
+    update cheatreport
+    set creator = #{creator,jdbcType=BIGINT},
+      modifier = #{modifier,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      themeworkid = #{themeworkid,jdbcType=BIGINT},
+      reporterid = #{reporterid,jdbcType=BIGINT},
+      fromip = #{fromip,jdbcType=VARCHAR},
+      checked = #{checked,jdbcType=BIT},
+      checkorid = #{checkorid,jdbcType=BIGINT},
+      crtype = #{crtype,jdbcType=INTEGER},
+      website = #{website,jdbcType=VARCHAR},
+      sysCheck = #{syscheck,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.mall.mapper.GoodstypeMapper">
+
+	<resultMap type="Map" id="resultMap">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="note" column="note" />
+		<result property="valid" column="valid" />
+		<result property="level" column="level" />
+		<result property="pid" column="pid" />
+		<collection property="children" ofType="java.util.HashMap"
+			javaType="list">
+			<result property="id" column="cid" />
+			<result property="name" column="cname" />
+			<result property="note" column="cnote" />
+			<result property="valid" column="cvalid" />
+			<result property="level" column="clevel" />
+			<result property="pid" column="cpid" />
+		</collection>
+	</resultMap>
+
+	<resultMap type="Map" id="resultTypeMap">
+		<result property="quantityid" column="id" />
+		<result property="name" column="name" />
+		<result property="sale" column="sale" />
+		<result property="keyed" column="keyed" />
+		<result property="state" column="state" />
+		<result property="indx" column="indx" />
+		<result property="goodstype" column="goodstype" />
+		<result property="enumed" column="enumed" />
+		<result property="inputed" column="inputed" />
+		<collection property="goodsvalue"
+			ofType="java.util.HashMap"  javaType="list">
+			<id property="valueid" column="valueid" />
+			<result property="value" column="value" javaType="String"
+				jdbcType="VARCHAR" />
+			<result property="venumed" column="venumed" javaType="int"
+				jdbcType="INTEGER" />
+		</collection>
+	</resultMap>
+
+
+	<select id="gettypeList" resultMap="resultMap">
+		SELECT a.* ,b.id as
+		cid,b.name as cname,b.note as cnote,b.valid as cvalid,b.level as clevel,b.pid as cpid
+		from goodstype a
+		left join goodstype b on b.pid = a.id where
+		a.pid=0
+	</select>
+
+	<select id="count" parameterType="java.lang.Long"
+		resultType="Integer">
+		select count(*) from quantity where
+		quantity.goodstype=#{typeid}
+	</select>
+
+    <select id="counttype" parameterType="java.lang.Long"
+		resultType="Integer">
+		select count(*) from goodstype where id=#{id}
+	</select>
+
+	<select id="getquantityList" resultMap="resultTypeMap"
+		parameterType="java.lang.Long">
+		SELECT quantity.* ,goodsvalue.id as
+		valueid,goodsvalue.value,goodsvalue.enumed as venumed from quantity
+		left join goodsvalue on goodsvalue.quantityid = quantity.id where
+		quantity.goodstype=#{typeid} and goodsvalue.goodsid = 0 limit ${page*pagesize},#{pagesize}
+	</select>
+
+	<select id="getchild" resultType="java.util.HashMap"
+		parameterType="java.lang.Long">
+		SELECT * from goodstype where pid = #{id}
+	</select>
+
+	<insert id="dosave" useGeneratedKeys="true" keyProperty="id" parameterType="com.match.mall.persist.GoodsType">
+		insert into goodstype (pid,name,note,lft,rgt,level,ordering,valid) values (#{pid},#{name},#{note},0,0,#{level},0,1)
+	</insert>
+
+	<delete id="del" parameterType="java.lang.Long">
+		delete from goodstype where id =
+		#{typeid}
+	</delete>
+
+	<insert id="addQuantity" useGeneratedKeys="true" keyProperty="id" parameterType="com.match.mall.persist.Quantity">
+		insert into quantity (name,goodstype) values (#{name},#{goodstype})
+	</insert>
+	
+	<insert id="addvalue" useGeneratedKeys="true" keyProperty="id" parameterType="Map">
+		insert into goodsvalue (quantityid,quantity,value,goodsid) values (#{quantityid},#{quantity},#{value},0)
+	</insert>
+	
+	<delete id="delQuantity" parameterType="java.lang.Long">
+		delete from quantity where id = #{quantityid}
+	</delete>
+	
+	<delete id="delValue" parameterType="java.lang.Long">
+		delete from goodsvalue where quantityid = #{quantityid}
+	</delete>
+	
+	<delete id="delgoodsValue" parameterType="java.lang.Long">
+		delete from goodsvalue where id = #{valueid}
+	</delete>
+	
+	<update id="update" parameterType="com.match.mall.persist.GoodsType">
+		update  goodstype
+		<set>
+            <if test="name != null">name=#{name},</if>
+            <if test="note != null">note=#{note}</if>
+        </set>
+		 where id = #{id}
+	</update>
+	
+	<select id="getDetail" resultType="com.match.mall.persist.GoodsType" parameterType="java.lang.Long">
+		SELECT * from goodstype where id = #{id}
+	</select>
+	
+	<insert id="addGoodsValue" useGeneratedKeys="true" keyProperty="id" parameterType="com.match.mall.persist.GoodsValue">
+		insert into goodsvalue (quantityid,quantity,value,goodsid) values (#{quantityid},#{quantity},#{value},0)
+	</insert>
+	
+	<update id="updatequantity" parameterType="Map">
+		update  quantity
+		<set>
+            <if test="quantity != null">name=#{quantity}</if>
+        </set>
+		 where id = #{quantityid}
+	</update>
+	
+	<update id="updategoodsvalue" parameterType="Map">
+		update  goodsvalue
+		<set>
+            <if test="quantity != null">quantity=#{quantity}</if>
+        </set>
+		 where quantityid = #{quantityid}
+	</update>
+	
+	<insert id="editvalue" useGeneratedKeys="true" keyProperty="id" parameterType="Map">
+		insert into goodsvalue (quantityid,quantity,value,goodsid) values (#{quantityid},#{quantity},#{value},0)
+	</insert>
+	
+	<select id="getIsuse" parameterType="java.lang.Long" resultType="Integer">
+		SELECT count(*) from goodsvalue where quantityid = #{quantityid} and goodsid>0
+	</select>
+	
+</mapper>

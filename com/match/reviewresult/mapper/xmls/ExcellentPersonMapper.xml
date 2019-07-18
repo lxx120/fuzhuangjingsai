@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.reviewresult.mapper.ExcellentPersonMapper">
+  <resultMap id="BaseResultMap" type="com.match.reviewresult.model.ExcellentPerson">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="modifier" jdbcType="BIGINT" property="modifier" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="competationid" jdbcType="BIGINT" property="competationid" />
+    <result column="divisionid" jdbcType="BIGINT" property="divisionid" />
+    <result column="totalcsore" jdbcType="DOUBLE" property="totalcsore" />
+    <result column="ranking" jdbcType="INTEGER" property="ranking" />
+    <result column="userid" jdbcType="BIGINT" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, creator, modifier, ctime, mtime, competationid, divisionid, totalcsore, ranking, 
+    userid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from excellentperson
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from excellentperson
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.match.reviewresult.model.ExcellentPerson">
+    insert into excellentperson (id, creator, modifier, 
+      ctime, mtime, competationid, 
+      divisionid, totalcsore, ranking, 
+      userid)
+    values (#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, #{modifier,jdbcType=BIGINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}, #{competationid,jdbcType=BIGINT}, 
+      #{divisionid,jdbcType=BIGINT}, #{totalcsore,jdbcType=DOUBLE}, #{ranking,jdbcType=INTEGER}, 
+      #{userid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.match.reviewresult.model.ExcellentPerson">
+    insert into excellentperson
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="competationid != null">
+        competationid,
+      </if>
+      <if test="divisionid != null">
+        divisionid,
+      </if>
+      <if test="totalcsore != null">
+        totalcsore,
+      </if>
+      <if test="ranking != null">
+        ranking,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="competationid != null">
+        #{competationid,jdbcType=BIGINT},
+      </if>
+      <if test="divisionid != null">
+        #{divisionid,jdbcType=BIGINT},
+      </if>
+      <if test="totalcsore != null">
+        #{totalcsore,jdbcType=DOUBLE},
+      </if>
+      <if test="ranking != null">
+        #{ranking,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.match.reviewresult.model.ExcellentPerson">
+    update excellentperson
+    <set>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="competationid != null">
+        competationid = #{competationid,jdbcType=BIGINT},
+      </if>
+      <if test="divisionid != null">
+        divisionid = #{divisionid,jdbcType=BIGINT},
+      </if>
+      <if test="totalcsore != null">
+        totalcsore = #{totalcsore,jdbcType=DOUBLE},
+      </if>
+      <if test="ranking != null">
+        ranking = #{ranking,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.match.reviewresult.model.ExcellentPerson">
+    update excellentperson
+    set creator = #{creator,jdbcType=BIGINT},
+      modifier = #{modifier,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      competationid = #{competationid,jdbcType=BIGINT},
+      divisionid = #{divisionid,jdbcType=BIGINT},
+      totalcsore = #{totalcsore,jdbcType=DOUBLE},
+      ranking = #{ranking,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+      <insert id="addbatchExcellentPerson">
+  	insert into excellentperson (mtime,competationid,userid,totalcsore,ranking)
+  	values
+  	     <foreach collection="list" item="item"  separator=",">  
+          (#{item.mtime}, #{item.competationid},  
+          #{item.userid}, #{item.totalcsore}, #{item.ranking})
+      </foreach>
+  </insert>
+</mapper>

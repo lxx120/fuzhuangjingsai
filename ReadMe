@@ -1,0 +1,5 @@
+服务器 与 188 切换  修改文件
+    - zookeeper.properties
+    - redis.properties
+    - jedis/RedisConfig.java
+    - dubbo/configure/ZookeeperConfig.java

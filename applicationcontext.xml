@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-4.1.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.1.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+	http://www.springframework.org/schema/task  
+    http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+	>
+
+	<!-- 解密加密jdbc -->
+	<bean id="propertyConfigurer"
+		class="com.match.common.PropertyConfig">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="hikari" class="com.zaxxer.hikari.HikariDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver" />  <!-- 无需指定，除非系统无法自动识别 -->
+		<property name="jdbcUrl"
+			value="jdbc:mysql://192.168.1.188/match?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true" />
+			<!--192.168.1.188  match  10.205.66.45 root BjFzjs1965!-->
+		<property name="username" value="match" />
+		<property name="password" value="match" />
+		<!-- 连接只读数据库时配置为true， 保证安全 -->
+		<property name="readOnly" value="false" />
+		<!-- 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 缺省:30秒 -->
+		<property name="connectionTimeout" value="30000" />
+		<!-- 一个连接idle状态的最大时长（毫秒），超时则被释放（retired），缺省:10分钟 -->
+		<property name="idleTimeout" value="6000" />
+		<!-- 一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒，参考MySQL 
+			wait_timeout参数（show variables like '%timeout%';） -->
+		<property name="maxLifetime" value="1800000" />
+		<!-- 连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count) -->
+		<property name="maximumPoolSize" value="100" />
+	</bean>
+
+	<bean id="sqlsessionfactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="hikari"></property>
+		<property name="mapperLocations"
+			value="classpath*:com/match/**/mapper/xmls/*.xml" />
+		<property name="configLocation" value="classpath:mybatis.xml"></property>
+	</bean>
+
+	<bean id="mapperscanner"
+		class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.match.**.mapper"></property>
+		<property name="sqlSessionFactoryBeanName"
+			value="sqlsessionfactory" />
+	</bean>
+
+	<bean id="mybatistxm"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="hikari"></property>
+	</bean>
+	<tx:annotation-driven
+		transaction-manager="mybatistxm"></tx:annotation-driven>
+
+	<bean id="sqlsessiontemplate"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlsessionfactory" />
+	</bean>
+
+	<bean id="jdao" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="hikari">
+		</property>
+	</bean>
+
+	<!-- spring文件上传 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+		<property name="maxUploadSize" value="10485760000"></property>
+		<property name="maxInMemorySize" value="40960"></property>
+	</bean>
+
+	<!-- spring 多语言local配置 -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="cookieMaxAge" value="604800" />
+		<property name="defaultLocale" value="zh_CN" />
+		<property name="cookieName" value="Language"></property>
+	</bean>
+
+
+	<bean id="restTemplate"
+		class="org.springframework.web.client.RestTemplate"></bean>
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.match">
+		<!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" 
+			/> <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" 
+			/> -->
+	</context:component-scan>
+
+
+	<!-- 验证码配置 -->
+	<bean id="captchaProducer"
+		class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">yes</prop>
+						<prop key="kaptcha.border.color">105,179,90</prop>
+						<prop key="kaptcha.textproducer.font.color">blue</prop>
+						<prop key="kaptcha.image.width">115</prop>
+						<prop key="kaptcha.image.height">35</prop>
+						<prop key="kaptcha.textproducer.font.size">35</prop>
+						<prop key="kaptcha.session.key">code</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	<!-- 配置Job类 -->
+	<bean id="myJob"
+		class="com.match.controllers.Quartz.CompetitionQuartzController"></bean>
+
+	<!-- 配置JobDetail -->
+	<bean id="springQtzJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 执行目标job -->
+		<property name="targetObject" ref="myJob"></property>
+
+		<!-- 要执行的方法 -->
+		<property name="targetMethod" value="updateCompetitionStatus"></property>
+	</bean>
+
+	<!-- 配置tirgger触发器 -->
+	<bean id="cronTriggerFactoryBean"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<!-- jobDetail -->
+		<property name="jobDetail" ref="springQtzJobMethod"></property>
+
+		<!-- cron表达式，执行时间 每5秒执行一次 -->
+		<property name="cronExpression" value="0 55 19 * * ?"></property>
+	</bean>
+
+	<!-- 配置调度工厂 -->
+	<bean id="springJobSchedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
+		lazy-init="false">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTriggerFactoryBean"></ref>
+			</list>
+		</property>	
+
+	</bean>
+
+
+	<!--开启这个配置，spring才能识别@Scheduled注解 -->
+	<task:annotation-driven/>
+	<!-- 自动扫描注解的bean  <context:component-scan base-package="com.match.controllers.Quartz.AssessRoundsQuartzController" />-->
+	
+</beans>

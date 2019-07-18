@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.mall.mapper.MemberMapper">
+    <select id="getByName" parameterType="String"
+		resultType="com.match.mall.persist.Member">
+		select * from member where username = #{username}
+	</select>
+	
+	<select id="count" parameterType="com.match.mall.persist.Member" resultType="Integer">
+		select count(*) from member 
+		<where> 
+			<if test="username != null and username != ''">
+				 username like '%${username}%'
+			</if>
+            <if test="phone != null and phone != ''">
+				and phone = #{phone}
+			</if>
+			<if test="mail != null and mail != ''">
+				 and mail = #{mail}
+			</if>
+			<if test="enterprise != null and enterprise != ''">
+				 and enterprise = #{enterprise}
+			</if>
+		</where> 	
+	</select>
+	
+	<select id="getmemberList" parameterType="Map" resultType="Map">
+		select * from member 
+		<where> 
+			<if test="username != null and username != ''">
+				 username like '%${username}%'
+			</if>
+            <if test="phone != null and phone != ''">
+				and phone = #{phone}
+			</if>
+			<if test="mail != null and mail != ''">
+				 and mail = #{mail}
+			</if>
+			<if test="enterprise != null and enterprise != ''">
+				 and enterprise = #{enterprise}
+			</if>
+		</where> 
+        limit ${page*pagesize},#{pagesize}	
+	</select>
+	
+	 <select id="getById" parameterType="java.lang.Long"
+		resultType="com.match.mall.persist.Member">
+		select * from member where id = #{id}
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from member where id = #{id}
+	</delete>
+</mapper>

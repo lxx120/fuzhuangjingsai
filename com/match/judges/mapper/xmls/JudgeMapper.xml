@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.judges.mapper.JudgeMapper">
+  <resultMap id="BaseResultMap" type="com.match.judges.model.Judge">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="modifier" jdbcType="BIGINT" property="modifier" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="userid" jdbcType="BIGINT" property="userid" />
+    <result column="divisionid" jdbcType="BIGINT" property="divisionid" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="worktime" jdbcType="DOUBLE" property="worktime" />
+    <result column="collegeid" jdbcType="BIGINT" property="collegeid" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="arid" jdbcType="BIGINT" property="arid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, creator, modifier, ctime, mtime, userid, divisionid, type, worktime, collegeid, 
+    weight, arid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from judge
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from judge
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.match.judges.model.Judge">
+    insert into judge (id, creator, modifier, 
+      ctime, mtime, userid, 
+      divisionid, type, worktime, 
+      collegeid, weight, arid
+      )
+    values (#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, #{modifier,jdbcType=BIGINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}, #{userid,jdbcType=BIGINT}, 
+      #{divisionid,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{worktime,jdbcType=DOUBLE}, 
+      #{collegeid,jdbcType=BIGINT}, #{weight,jdbcType=DOUBLE}, #{arid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.match.judges.model.Judge">
+    insert into judge
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="divisionid != null">
+        divisionid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="worktime != null">
+        worktime,
+      </if>
+      <if test="collegeid != null">
+        collegeid,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="arid != null">
+        arid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="divisionid != null">
+        #{divisionid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="worktime != null">
+        #{worktime,jdbcType=DOUBLE},
+      </if>
+      <if test="collegeid != null">
+        #{collegeid,jdbcType=BIGINT},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="arid != null">
+        #{arid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.match.judges.model.Judge">
+    update judge
+    <set>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="divisionid != null">
+        divisionid = #{divisionid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="worktime != null">
+        worktime = #{worktime,jdbcType=DOUBLE},
+      </if>
+      <if test="collegeid != null">
+        collegeid = #{collegeid,jdbcType=BIGINT},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="arid != null">
+        arid = #{arid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.match.judges.model.Judge">
+    update judge
+    set creator = #{creator,jdbcType=BIGINT},
+      modifier = #{modifier,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=BIGINT},
+      divisionid = #{divisionid,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      worktime = #{worktime,jdbcType=DOUBLE},
+      collegeid = #{collegeid,jdbcType=BIGINT},
+      weight = #{weight,jdbcType=DOUBLE},
+      arid = #{arid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

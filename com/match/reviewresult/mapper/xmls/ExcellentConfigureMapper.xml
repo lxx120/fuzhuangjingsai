@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.reviewresult.mapper.ExcellentConfigureMapper">
+  <resultMap id="BaseResultMap" type="com.match.reviewresult.model.ExcellentConfigure">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="modifier" jdbcType="BIGINT" property="modifier" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="competationid" jdbcType="BIGINT" property="competationid" />
+    <result column="divisionid" jdbcType="BIGINT" property="divisionid" />
+    <result column="excellentperson" jdbcType="INTEGER" property="excellentperson" />
+    <result column="excellentteacher" jdbcType="INTEGER" property="excellentteacher" />
+    <result column="excellentcolldge" jdbcType="INTEGER" property="excellentcolldge" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, creator, modifier, ctime, mtime, competationid, divisionid, excellentperson, 
+    excellentteacher, excellentcolldge
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from excellentconfigure
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from excellentconfigure
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.match.reviewresult.model.ExcellentConfigure">
+    insert into excellentconfigure (id, creator, modifier, 
+      ctime, mtime, competationid, 
+      divisionid, excellentperson, excellentteacher, 
+      excellentcolldge)
+    values (#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, #{modifier,jdbcType=BIGINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}, #{competationid,jdbcType=BIGINT}, 
+      #{divisionid,jdbcType=BIGINT}, #{excellentperson,jdbcType=INTEGER}, #{excellentteacher,jdbcType=INTEGER}, 
+      #{excellentcolldge,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.match.reviewresult.model.ExcellentConfigure">
+    insert into excellentconfigure
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="competationid != null">
+        competationid,
+      </if>
+      <if test="divisionid != null">
+        divisionid,
+      </if>
+      <if test="excellentperson != null">
+        excellentperson,
+      </if>
+      <if test="excellentteacher != null">
+        excellentteacher,
+      </if>
+      <if test="excellentcolldge != null">
+        excellentcolldge,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="competationid != null">
+        #{competationid,jdbcType=BIGINT},
+      </if>
+      <if test="divisionid != null">
+        #{divisionid,jdbcType=BIGINT},
+      </if>
+      <if test="excellentperson != null">
+        #{excellentperson,jdbcType=INTEGER},
+      </if>
+      <if test="excellentteacher != null">
+        #{excellentteacher,jdbcType=INTEGER},
+      </if>
+      <if test="excellentcolldge != null">
+        #{excellentcolldge,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.match.reviewresult.model.ExcellentConfigure">
+    update excellentconfigure
+    <set>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="competationid != null">
+        competationid = #{competationid,jdbcType=BIGINT},
+      </if>
+      <if test="divisionid != null">
+        divisionid = #{divisionid,jdbcType=BIGINT},
+      </if>
+      <if test="excellentperson != null">
+        excellentperson = #{excellentperson,jdbcType=INTEGER},
+      </if>
+      <if test="excellentteacher != null">
+        excellentteacher = #{excellentteacher,jdbcType=INTEGER},
+      </if>
+      <if test="excellentcolldge != null">
+        excellentcolldge = #{excellentcolldge,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.match.reviewresult.model.ExcellentConfigure">
+    update excellentconfigure
+    set creator = #{creator,jdbcType=BIGINT},
+      modifier = #{modifier,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      competationid = #{competationid,jdbcType=BIGINT},
+      divisionid = #{divisionid,jdbcType=BIGINT},
+      excellentperson = #{excellentperson,jdbcType=INTEGER},
+      excellentteacher = #{excellentteacher,jdbcType=INTEGER},
+      excellentcolldge = #{excellentcolldge,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

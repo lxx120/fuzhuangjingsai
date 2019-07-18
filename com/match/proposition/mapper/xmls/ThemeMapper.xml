@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.proposition.mapper.ThemeMapper">
+	<resultMap id="BaseResultMap"
+		type="com.match.proposition.model.Theme">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="creator" jdbcType="BIGINT" property="creator" />
+		<result column="modifier" jdbcType="BIGINT" property="modifier" />
+		<result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+		<result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="enterpriseid" jdbcType="BIGINT"
+			property="enterpriseid" />
+		<result column="abstraction" jdbcType="VARCHAR"
+			property="abstraction" />
+		<result column="limitPeople" jdbcType="INTEGER"
+			property="limitpeople" />
+		<result column="stime" jdbcType="TIMESTAMP" property="stime" />
+		<result column="etime" jdbcType="TIMESTAMP" property="etime" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="divisionid" jdbcType="BIGINT"
+			property="divisionid" />
+		<result column="competitionid" jdbcType="BIGINT"
+			property="competitionid" />
+		<result column="singupsttime" jdbcType="TIMESTAMP"
+			property="singupsttime" />
+		<result column="singupendtime" jdbcType="TIMESTAMP"
+			property="singupendtime" />
+		<result column="production" jdbcType="BIT"
+			property="production" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.match.proposition.model.Theme">
+		<result column="content" jdbcType="LONGVARCHAR"
+			property="content" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, creator, modifier, ctime, mtime, type, title,
+		enterpriseid,
+		abstraction, limitPeople,
+		stime, etime, status,
+		divisionid, competitionid, singupsttime,
+		singupendtime, production
+	</sql>
+	<sql id="Blob_Column_List">
+		content
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from theme
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from theme
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"
+		parameterType="com.match.proposition.model.Theme">
+		insert into theme (id, creator, modifier,
+		ctime, mtime,
+		type,
+		title, enterpriseid, abstraction,
+		limitPeople, stime, etime,
+		status, divisionid, competitionid,
+		singupsttime, singupendtime,
+		production,
+		content)
+		values (#{id,jdbcType=BIGINT},
+		#{creator,jdbcType=BIGINT},
+		#{modifier,jdbcType=BIGINT},
+		#{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP},
+		#{type,jdbcType=INTEGER},
+		#{title,jdbcType=VARCHAR},
+		#{enterpriseid,jdbcType=BIGINT},
+		#{abstraction,jdbcType=VARCHAR},
+		#{limitpeople,jdbcType=INTEGER}, #{stime,jdbcType=TIMESTAMP},
+		#{etime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=INTEGER},
+		#{divisionid,jdbcType=BIGINT},
+		#{competitionid,jdbcType=BIGINT},
+		#{singupsttime,jdbcType=TIMESTAMP},
+		#{singupendtime,jdbcType=TIMESTAMP}, #{production,jdbcType=BIT},
+		#{content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" useGeneratedKeys="true"
+		keyProperty="id" parameterType="com.match.proposition.model.Theme">
+		insert into theme
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="modifier != null">
+				modifier,
+			</if>
+			<if test="ctime != null">
+				ctime,
+			</if>
+			<if test="mtime != null">
+				mtime,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="enterpriseid != null">
+				enterpriseid,
+			</if>
+			<if test="abstraction != null">
+				abstraction,
+			</if>
+			<if test="limitpeople != null">
+				limitPeople,
+			</if>
+			<if test="stime != null">
+				stime,
+			</if>
+			<if test="etime != null">
+				etime,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="divisionid != null">
+				divisionid,
+			</if>
+			<if test="competitionid != null">
+				competitionid,
+			</if>
+			<if test="singupsttime != null">
+				singupsttime,
+			</if>
+			<if test="singupendtime != null">
+				singupendtime,
+			</if>
+			<if test="production != null">
+				production,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="themecode!=null">
+				themecode,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=BIGINT},
+			</if>
+			<if test="modifier != null">
+				#{modifier,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				#{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				#{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="enterpriseid != null">
+				#{enterpriseid,jdbcType=BIGINT},
+			</if>
+			<if test="abstraction != null">
+				#{abstraction,jdbcType=VARCHAR},
+			</if>
+			<if test="limitpeople != null">
+				#{limitpeople,jdbcType=INTEGER},
+			</if>
+			<if test="stime != null">
+				#{stime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="etime != null">
+				#{etime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="divisionid != null">
+				#{divisionid,jdbcType=BIGINT},
+			</if>
+			<if test="competitionid != null">
+				#{competitionid,jdbcType=BIGINT},
+			</if>
+			<if test="singupsttime != null">
+				#{singupsttime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="singupendtime != null">
+				#{singupendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="production != null">
+				#{production,jdbcType=BIT},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="themecode !=null">
+				#{themecode}
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.match.proposition.model.Theme">
+		update theme
+		<set>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=BIGINT},
+			</if>
+			<if test="modifier != null">
+				modifier = #{modifier,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="enterpriseid != null">
+				enterpriseid = #{enterpriseid,jdbcType=BIGINT},
+			</if>
+			<if test="abstraction != null">
+				abstraction = #{abstraction,jdbcType=VARCHAR},
+			</if>
+			<if test="limitpeople != null">
+				limitPeople = #{limitpeople,jdbcType=INTEGER},
+			</if>
+			<if test="stime != null">
+				stime = #{stime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="etime != null">
+				etime = #{etime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="divisionid != null">
+				divisionid = #{divisionid,jdbcType=BIGINT},
+			</if>
+			<if test="competitionid != null">
+				competitionid = #{competitionid,jdbcType=BIGINT},
+			</if>
+			<if test="singupsttime != null">
+				singupsttime = #{singupsttime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="singupendtime != null">
+				singupendtime = #{singupendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="production != null">
+				production = #{production,jdbcType=BIT},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="themecode !=null">
+				themecode = #{themecode}
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs"
+		parameterType="com.match.proposition.model.Theme">
+		update theme
+		set creator = #{creator,jdbcType=BIGINT},
+		modifier = #{modifier,jdbcType=BIGINT},
+		ctime =
+		#{ctime,jdbcType=TIMESTAMP},
+		mtime = #{mtime,jdbcType=TIMESTAMP},
+		type =
+		#{type,jdbcType=INTEGER},
+		title = #{title,jdbcType=VARCHAR},
+		enterpriseid = #{enterpriseid,jdbcType=BIGINT},
+		abstraction =
+		#{abstraction,jdbcType=VARCHAR},
+		limitPeople =
+		#{limitpeople,jdbcType=INTEGER},
+		stime = #{stime,jdbcType=TIMESTAMP},
+		etime = #{etime,jdbcType=TIMESTAMP},
+		status =
+		#{status,jdbcType=INTEGER},
+		divisionid = #{divisionid,jdbcType=BIGINT},
+		competitionid = #{competitionid,jdbcType=BIGINT},
+		singupsttime =
+		#{singupsttime,jdbcType=TIMESTAMP},
+		singupendtime =
+		#{singupendtime,jdbcType=TIMESTAMP},
+		production =
+		#{production,jdbcType=BIT},
+		content = #{content,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.match.proposition.model.Theme">
+		update theme
+		set creator = #{creator,jdbcType=BIGINT},
+		modifier = #{modifier,jdbcType=BIGINT},
+		ctime =
+		#{ctime,jdbcType=TIMESTAMP},
+		mtime = #{mtime,jdbcType=TIMESTAMP},
+		type =
+		#{type,jdbcType=INTEGER},
+		title = #{title,jdbcType=VARCHAR},
+		enterpriseid = #{enterpriseid,jdbcType=BIGINT},
+		abstraction =
+		#{abstraction,jdbcType=VARCHAR},
+		limitPeople =
+		#{limitpeople,jdbcType=INTEGER},
+		stime = #{stime,jdbcType=TIMESTAMP},
+		etime = #{etime,jdbcType=TIMESTAMP},
+		status =
+		#{status,jdbcType=INTEGER},
+		divisionid = #{divisionid,jdbcType=BIGINT},
+		competitionid = #{competitionid,jdbcType=BIGINT},
+		singupsttime =
+		#{singupsttime,jdbcType=TIMESTAMP},
+		singupendtime =
+		#{singupendtime,jdbcType=TIMESTAMP},
+		production =
+		#{production,jdbcType=BIT}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="findEnterpriseJoinTheme" parameterType="Map"
+		resultType="Map">
+		SELECT distinct name,b.id FROM Theme a LEFT JOIN
+		Competition b ON
+		a.`competitionid`=b.`id` where a.`enterpriseid`=#{id}
+		order by b.ctime
+	</select>
+
+	<select id="findfindEnterpriseTheme" parameterType="Map"
+		resultType="Map">
+		SELECT a.id, a.`competitionid`, a.`enterpriseid`, a.`title`, b.`name`
+		, DATE_FORMAT(a.stime, '%Y-%m-%d %H:%i:%s') AS stime ,
+		DATE_FORMAT(a.singupsttime, '%Y-%m-%d %H:%i:%s') AS singupsttime ,
+		DATE_FORMAT(a.singupendtime, '%Y-%m-%d %H:%i:%s') AS singupendtime
+		FROM theme a LEFT JOIN enterprise b ON a.`enterpriseid` = b.`id` where
+		competitionid=#{competitionid}
+		<if test="people==1 and time==0">
+			ORDER BY a.limitpeople ASC
+		</if>
+		<if test="people==2 and time==0">
+			ORDER BY a.limitpeople desc
+		</if>
+		<if test="time==1 and people==0">
+			order by a.time asc
+		</if>
+		<if test="time==2 and people==0">
+			order by a.time desc
+		</if>
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="findfindEnterpriseTheme1" parameterType="Map"
+		resultType="Map">
+		SELECT a.id, a.`competitionid`, a.`enterpriseid`, a.`title`, b.`name`
+		, DATE_FORMAT(a.stime, '%Y-%m-%d %H:%i:%s') AS stime ,
+		DATE_FORMAT(a.singupsttime, '%Y-%m-%d %H:%i:%s') AS singupsttime ,
+		DATE_FORMAT(a.singupendtime, '%Y-%m-%d %H:%i:%s') AS singupendtime
+		FROM theme a LEFT JOIN enterprise b ON a.`enterpriseid` = b.`id` where
+		competitionid=#{competitionid} and a.divisionid=#{divisionid}
+		<if test="people==1 and time==0">
+			ORDER BY a.limitpeople ASC
+		</if>
+		<if test="people==2 and time==0">
+			ORDER BY a.limitpeople desc
+		</if>
+		<if test="time==1 and people==0">
+			order by a.time asc
+		</if>
+		<if test="time==2 and people==0">
+			order by a.time desc
+		</if>
+		limit ${page},#{pagesize}
+	</select>
+
+	<update id="batchUpdateTheme" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			update theme
+			<set>
+				status=${item.status}
+			</set>
+			where id = ${item.id}
+		</foreach>
+	</update>
+
+	<select id="count"
+		parameterType="com.match.proposition.model.Theme" resultType="Integer">
+		SELECT
+		COUNT(*) FROM (SELECT DISTINCT
+		e.enterprisephoto,
+		e.`name`,
+		e.`id`
+		FROM
+		enterprise e
+		LEFT JOIN theme t
+		ON t.`enterpriseid` = e.id
+		WHERE t.competitionid = #{competitionid}) a
+	</select>
+	<select id="findThemepage" parameterType="Map" resultType="Map">
+		SELECT DISTINCT
+		e.enterprisephoto,
+		e.`name`,
+		e.`id`
+		FROM
+		enterprise e
+		LEFT
+		JOIN theme t
+		ON t.`enterpriseid` = e.id
+		WHERE t.competitionid = #{competitionid}
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="findThemeDistributionPage" parameterType="Map"
+		resultType="Map">
+		select a.workid from assessdaiworks a left join themework b on a.workid=b.id left join themesignup c on b.themesignupid=c.id where
+		a.competitionid=#{competitionid} and
+		a.divisionid=#{divisionid} and
+		a.arid=#{arid}  and c.workType=#{code}
+		order by a.ctime
+		limit ${size},#{size1}
+	</select>
+
+	<select id="findThemeByEnterpriseId" parameterType="Map"
+		resultType="Map">
+		SELECT title,a.id,DATE_FORMAT(a.ctime,'%Y-%m-%d %H:%i:%s')
+		AS ctime,b.`id`
+		AS proid FROM theme a LEFT JOIN propositionstrategy b
+		ON
+		a.id=b.`themeid` where a.enterpriseid=#{enterpriseid} and
+		a.competitionid=#{competitionid}
+		order by a.ctime
+		limit
+		${page},#{pagesize}
+	</select>
+
+	<select id="countfindThemeByEnterpriseId" resultType="Integer">
+		SELECT
+		count(*) FROM theme a LEFT JOIN propositionstrategy b ON
+		a.id=b.`themeid` where a.enterpriseid=#{enterpriseid} and
+		a.competitionid=#{competitionid}
+	</select>
+	
+	<select id="findThemepage1" parameterType="Map" resultType="Map">
+	<!-- select e.enterprisephoto,e.`name`,DATE_FORMAT(t.ctime,'%Y-%m-%d %H:%i:%s') AS ctime,t.title,t.id from theme t LEFT JOIN enterprise e on t.`enterpriseid` = e.id 
+	where t.competitionid=#{competitionid}
+	limit ${page},#{pagesize} -->
+	select e.enterprisephoto,e.`name`,DATE_FORMAT(t.ctime,'%Y-%m-%d %H:%i:%s') AS ctime,t.title,t.id,p.id AS proid 
+	from theme t 
+	LEFT JOIN enterprise e on t.`enterpriseid` = e.id 
+	LEFT JOIN propositionstrategy p on t.id = p.themeid 
+	where t.competitionid=#{competitionid}
+	limit ${page},#{pagesize}
+  	</select>
+  	
+  	<select id="count1" parameterType="com.match.proposition.model.Theme" resultType="Integer">
+  	select count(*) from theme t LEFT JOIN enterprise e on t.enterpriseid = e.id where t.competitionid=#{competitionid}
+  </select>
+  
+  	<select id="findthemeToSchool" parameterType="Map"  resultType="Map">
+  	SELECT b.`name`,a.`id` FROM `themesignup` a LEFT JOIN student c  ON a.userid = c.`userid` LEFT JOIN college b ON c.`college`=b.`id` WHERE a.workType=#{worktype} AND themeid = #{themeid}
+  	order by a.ctime
+  	 limit ${page},#{pagesize}
+  	</select>
+  	
+  	<select id="countfindthemeToSchool"  resultType="Integer">
+  	  	SELECT count(*) FROM `themesignup` a LEFT JOIN student c  ON a.userid = c.`userid` LEFT JOIN college b ON c.`college`=b.`id` WHERE a.workType=#{worktype} AND themeid = #{themeid}
+  	</select>
+</mapper>

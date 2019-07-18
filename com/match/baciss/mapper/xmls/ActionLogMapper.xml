@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.baciss.mapper.ActionLogMapper">
+  <resultMap id="BaseResultMap" type="com.match.baciss.model.ActionLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="modifier" jdbcType="BIGINT" property="modifier" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="userid" jdbcType="BIGINT" property="userid" />
+    <result column="operationid" jdbcType="BIGINT" property="operationid" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="moduleid" jdbcType="BIGINT" property="moduleid" />
+    <result column="objid" jdbcType="BIGINT" property="objid" />
+    <result column="fromIP" jdbcType="VARCHAR" property="fromip" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, creator, modifier, ctime, mtime, userid, operationid, result, moduleid, objid, 
+    fromIP
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from actionlog
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from actionlog
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.match.baciss.model.ActionLog">
+    insert into actionlog (id, creator, modifier, 
+      ctime, mtime, userid, 
+      operationid, result, moduleid, 
+      objid, fromIP)
+    values (#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, #{modifier,jdbcType=BIGINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}, #{userid,jdbcType=BIGINT}, 
+      #{operationid,jdbcType=BIGINT}, #{result,jdbcType=VARCHAR}, #{moduleid,jdbcType=BIGINT}, 
+      #{objid,jdbcType=BIGINT}, #{fromip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.match.baciss.model.ActionLog">
+    insert into actionlog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="operationid != null">
+        operationid,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="moduleid != null">
+        moduleid,
+      </if>
+      <if test="objid != null">
+        objid,
+      </if>
+      <if test="fromip != null">
+        fromIP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="operationid != null">
+        #{operationid,jdbcType=BIGINT},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleid != null">
+        #{moduleid,jdbcType=BIGINT},
+      </if>
+      <if test="objid != null">
+        #{objid,jdbcType=BIGINT},
+      </if>
+      <if test="fromip != null">
+        #{fromip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.match.baciss.model.ActionLog">
+    update actionlog
+    <set>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="operationid != null">
+        operationid = #{operationid,jdbcType=BIGINT},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleid != null">
+        moduleid = #{moduleid,jdbcType=BIGINT},
+      </if>
+      <if test="objid != null">
+        objid = #{objid,jdbcType=BIGINT},
+      </if>
+      <if test="fromip != null">
+        fromIP = #{fromip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.match.baciss.model.ActionLog">
+    update actionlog
+    set creator = #{creator,jdbcType=BIGINT},
+      modifier = #{modifier,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=BIGINT},
+      operationid = #{operationid,jdbcType=BIGINT},
+      result = #{result,jdbcType=VARCHAR},
+      moduleid = #{moduleid,jdbcType=BIGINT},
+      objid = #{objid,jdbcType=BIGINT},
+      fromIP = #{fromip,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

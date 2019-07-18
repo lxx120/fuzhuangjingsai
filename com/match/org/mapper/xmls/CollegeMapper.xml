@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.org.mapper.CollegeMapper">
+	<resultMap id="BaseResultMap"
+		type="com.match.org.model.College">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="creator" jdbcType="BIGINT" property="creator" />
+		<result column="modifier" jdbcType="BIGINT" property="modifier" />
+		<result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+		<result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="ename" jdbcType="VARCHAR" property="ename" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="code" jdbcType="VARCHAR" property="code" />
+		<result column="contator" jdbcType="VARCHAR"
+			property="contator" />
+		<result column="phone" jdbcType="INTEGER" property="phone" />
+		<result column="province" jdbcType="VARCHAR"
+			property="province" />
+		<result column="city" jdbcType="VARCHAR" property="city" />
+		<result column="note" jdbcType="VARCHAR" property="note" />
+		<result column="divisionid" jdbcType="BIGINT"
+			property="divisionid" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, creator, modifier, ctime, mtime, name, ename, address,
+		code,
+		contator, phone,
+		province, city, note, divisionid
+	</sql>
+
+
+	<select id="counts" parameterType="com.match.org.model.College"
+		resultType="Integer">
+		select count(*) from college
+	</select>
+	<select id="findGoodCollegeListPage" parameterType="Map"
+		resultType="Map">
+		select c.collegephoto,c.`name` from college c
+		limit
+		${page},#{pagesize}
+	</select>
+
+
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from college
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		college
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.match.org.model.College">
+		insert into college (id,
+		creator, modifier,
+		ctime, mtime, name,
+		ename, address, code,
+		contator,
+		phone, province,
+		city, note, divisionid
+		)
+		values (#{id,jdbcType=BIGINT},
+		#{creator,jdbcType=BIGINT},
+		#{modifier,jdbcType=BIGINT},
+		#{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP},
+		#{name,jdbcType=VARCHAR},
+		#{ename,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},
+		#{code,jdbcType=VARCHAR},
+		#{contator,jdbcType=VARCHAR}, #{phone,jdbcType=INTEGER},
+		#{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
+		#{note,jdbcType=VARCHAR},
+		#{divisionid,jdbcType=BIGINT}
+		)
+	</insert>
+	<insert id="insertSelective" useGeneratedKeys="true"
+		keyProperty="id" parameterType="com.match.org.model.College">
+		insert into college
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="modifier != null">
+				modifier,
+			</if>
+			<if test="ctime != null">
+				ctime,
+			</if>
+			<if test="mtime != null">
+				mtime,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="ename != null">
+				ename,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="code != null">
+				code,
+			</if>
+			<if test="contator != null">
+				contator,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="province != null">
+				province,
+			</if>
+			<if test="city != null">
+				city,
+			</if>
+			<if test="note != null">
+				note,
+			</if>
+
+			<if test="collegephoto !=null">
+				collegephoto,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=BIGINT},
+			</if>
+			<if test="modifier != null">
+				#{modifier,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				#{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				#{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="ename != null">
+				#{ename,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="contator != null">
+				#{contator,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=INTEGER},
+			</if>
+			<if test="province != null">
+				#{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+			</if>
+			<if test="note != null">
+				#{note,jdbcType=VARCHAR},
+			</if>
+			<if test="collegephoto != null">
+				#{collegephoto},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.match.org.model.College">
+		update college
+		<set>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=BIGINT},
+			</if>
+			<if test="modifier != null">
+				modifier = #{modifier,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="ename != null">
+				ename = #{ename,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				code = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="contator != null">
+				contator = #{contator,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=INTEGER},
+			</if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="note != null">
+				note = #{note,jdbcType=VARCHAR},
+			</if>
+			<if test="collegephoto != null">
+				collegephoto = #{collegephoto},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.match.org.model.College">
+		update college
+		set creator = #{creator,jdbcType=BIGINT},
+		modifier = #{modifier,jdbcType=BIGINT},
+		ctime =
+		#{ctime,jdbcType=TIMESTAMP},
+		mtime = #{mtime,jdbcType=TIMESTAMP},
+		name =
+		#{name,jdbcType=VARCHAR},
+		ename = #{ename,jdbcType=VARCHAR},
+		address =
+		#{address,jdbcType=VARCHAR},
+		code = #{code,jdbcType=VARCHAR},
+		contator =
+		#{contator,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=INTEGER},
+		province = #{province,jdbcType=VARCHAR},
+		city =
+		#{city,jdbcType=VARCHAR},
+		note = #{note,jdbcType=VARCHAR},
+		divisionid =
+		#{divisionid,jdbcType=BIGINT}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="findCollegePage" parameterType="Map"
+		resultType="Map">
+		select name,code,contator,phone,province,city,ename,address,id
+		from
+		college
+		<where>
+			<if test="name != null and name != ''">
+				name like '%${name}%'
+			</if>
+			<if test="province != null and province != ''">
+				and province = #{province}
+			</if>
+			<if test="city != null and city != ''">
+				and city = #{city}
+			</if>
+		</where>
+		order by ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="findCollegeById" parameterType="java.lang.Long"
+		resultType="Map">
+		select
+		a.collegephoto,a.name,a.ename,a.address,a.code,a.contator,a.phone,a.province,a.city,a.note,a.id,b.id
+		as userid
+		from college a left join user b on a.id=b.enterpriseid
+		where
+		a.id = #{id}
+	</select>
+
+	<select id="count" parameterType="com.match.org.model.College"
+		resultType="Integer">
+		select count(*) from college
+		<where>
+			<if test="name != null and name != ''">
+				name like '%${name}%'
+			</if>
+			<if test="province != null and province != ''">
+				and province = #{province}
+			</if>
+			<if test="city != null and city != ''">
+				and city = #{city}
+			</if>
+		</where>
+	</select>
+
+
+	<select id="findCollegeList" parameterType="Map"
+		resultType="Map">
+		select name,id
+		from college
+		<where>
+			<if test="name != null and name != ''">
+				name like '%${name}%'
+			</if>
+		</where>
+	</select>
+
+	<select id="findCollegeJoinCompetition" parameterType="Map"
+		resultType="Map">
+		SELECT
+		d.`name` AS competitionname,e.`title`,f.`name` AS
+		enterprisename,c.`realName`,b.`teacher`,h.`dename`
+		FROM
+		`themework` a
+		LEFT JOIN `themesignup` b
+		ON a.`themesignupid` = b.`id`
+		LEFT JOIN USER c
+		ON b.`userid` = c.`id`
+		LEFT JOIN `competition` d ON
+		a.`competitionid`=d.`id`
+		LEFT JOIN theme e ON b.`themeid`=e.`id`
+		LEFT
+		JOIN enterprise f ON e.`enterpriseid`=f.`id`
+		LEFT JOIN student g ON
+		c.`id` = g.`userid`
+		LEFT JOIN `department` h ON g.`department`=h.`id`
+		WHERE a.`competitionid` = #{competitionid}
+		AND c.`enterpriseid` =
+		#{collegeid}
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="countfindCollegeJoinCompetition"
+		resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		`themework` a
+		LEFT JOIN `themesignup` b
+		ON
+		a.`themesignupid`
+		= b.`id`
+		LEFT JOIN USER c
+		ON b.`userid` = c.`id`
+		LEFT
+		JOIN `competition`
+		d ON a.`competitionid`=d.`id`
+		LEFT JOIN theme e ON
+		b.`themeid`=e.`id`
+		LEFT JOIN enterprise f ON e.`enterpriseid`=f.`id`
+		LEFT JOIN student g
+		ON c.`id` = g.`userid`
+		LEFT JOIN `department` h ON
+		g.`department`=h.`id`
+		WHERE a.`competitionid` = #{competitionid}
+		AND
+		c.`enterpriseid` = #{collegeid}
+	</select>
+
+
+	<select id="findCollegeTeacher" parameterType="Map"
+		resultType="Map">
+		SELECT
+		DISTINCT
+		a.`teacher`,
+		a.`teacherphone`,
+		c.`skilledCheck`,
+		d.name AS typename,
+		b.id
+		FROM
+		`themesignup` a
+		LEFT JOIN
+		USER b
+		ON a.`teacherphone` = b.`phone`
+		LEFT
+		JOIN judgeinformation c ON
+		b.id = c.`userid`
+		LEFT JOIN `propositiontype`
+		d ON
+		c.`wantCheckTheme`=d.`code`
+		WHERE a.competitionid =
+		#{competitionid}
+		AND
+		b.`enterpriseid` = #{enterpriseid}
+		order by a.ctime
+		limit
+		${page},#{pagesize}
+	</select>
+
+	<select id="countfindCollegeTeacher" resultType="Integer">
+		SELECT COUNT(*)
+		FROM (
+		SELECT
+		DISTINCT
+		a.`teacher`,
+		a.`teacherphone`,
+		c.`skilledCheck`,
+		c.`wantCheckTheme`,d.name AS typename
+		FROM
+		`themesignup` a
+		LEFT JOIN USER
+		b
+		ON a.`teacherphone` = b.`phone`
+		LEFT JOIN judgeinformation c ON
+		b.id =
+		c.`userid`
+		LEFT JOIN `propositiontype` d ON c.`wantCheckTheme`=d.`code`
+		WHERE a.competitionid =
+		#{competitionid}
+		AND b.`enterpriseid` =
+		#{enterpriseid}) a
+	</select>
+
+	<select id="findCollegeStudent" parameterType="Map"
+		resultType="Map">
+		SELECT
+		b.realName,
+		b.phone,
+		d.name,
+		e.dename,
+		f.major,
+		b.id AS userid
+		FROM
+		`themesignup` a
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN student
+		c ON
+		b.`id` = c.`userid`
+		LEFT JOIN college d ON c.`college`=d.`id`
+		LEFT
+		JOIN department e ON c.`department` = e.`id`
+		LEFT JOIN departmajor f ON
+		c.`major` = f.`id`
+		WHERE a.competitionid =
+		#{competitionid}
+		AND
+		b.`enterpriseid` =
+		#{enterpriseid}
+		<if test="jename !=null">
+			and e.dename like '%${jename}%'
+		</if>
+		<if test="major !=null">
+			and f.major like '%${major}%'
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="countfindCollegeStudent" resultType="Integer">
+		select count(*) from (
+		SELECT
+		b.realName,
+		b.phone,
+		d.name,
+		e.dename,
+		f.major,
+		b.id AS userid
+		FROM
+		`themesignup` a
+		LEFT JOIN USER b
+		ON a.`userid`
+		= b.`id`
+		LEFT JOIN student
+		c ON
+		b.`id` = c.`userid`
+		LEFT JOIN college d ON
+		c.`college`=d.`id`
+		LEFT
+		JOIN department e ON c.`department` = e.`id`
+		LEFT JOIN departmajor f ON
+		c.`major` = f.`id`
+		WHERE a.competitionid =
+		#{competitionid}
+		AND
+		b.`enterpriseid` =
+		#{enterpriseid}
+		<if test="jename !=null">
+			and e.dename like '%${jename}%'
+		</if>
+		<if test="major !=null">
+			and f.major like '%${major}%'
+		</if>
+		) a
+	</select>
+
+	<select id="fingCollegeByDivision" parameterType="Map"
+		resultType="Map">
+		SELECT
+		DISTINCT
+		d.`id`,d.`name`,d.`ename`,d.collegephoto,d.province,d.city
+		FROM
+		`themesignup` a
+		LEFT JOIN
+		USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN student c ON
+		b.`id` = c.`userid`
+		LEFT JOIN college d ON c.`college`=d.`id`
+		WHERE a.competitionid =
+		#{competitionid} AND a.`divisionid`=#{divisionid}
+		<if test="name != null and name != ''">
+			and d.name like '%${name}%'
+		</if>
+		order by a.ctime
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="countfingCollegeByDivision" resultType="Integer">
+		SELECT COUNT(*) FROM (
+		SELECT
+		DISTINCT
+		d.`id`,d.`name`,d.`ename`
+		FROM
+		`themesignup` a
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN student c ON
+		b.`id` = c.`userid`
+		LEFT JOIN college d ON c.`college`=d.`id`
+		WHERE a.competitionid =
+		#{competitionid} AND a.`divisionid`=#{divisionid}
+		<if test="name != null and name != ''">
+			and d.name like '%${name}%'
+		</if>) a
+	</select>
+</mapper>

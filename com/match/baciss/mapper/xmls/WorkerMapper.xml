@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.baciss.mapper.WorkerMapper">
+  <resultMap id="BaseResultMap" type="com.match.baciss.model.Worker">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="modifier" jdbcType="BIGINT" property="modifier" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="userid" jdbcType="BIGINT" property="userid" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="college" jdbcType="BIGINT" property="college" />
+    <result column="department" jdbcType="BIGINT" property="department" />
+    <result column="major" jdbcType="BIGINT" property="major" />
+    <result column="admission" jdbcType="TIMESTAMP" property="admission" />
+    <result column="enterprise" jdbcType="BIGINT" property="enterprise" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="inDate" jdbcType="TIMESTAMP" property="indate" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, creator, modifier, ctime, mtime, userid, province, college, department, major, 
+    admission, enterprise, position, inDate, title
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from worker
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from worker
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.match.baciss.model.Worker">
+    insert into worker (id, creator, modifier, 
+      ctime, mtime, userid, 
+      province, college, department, 
+      major, admission, enterprise, 
+      position, inDate, title
+      )
+    values (#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, #{modifier,jdbcType=BIGINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}, #{userid,jdbcType=BIGINT}, 
+      #{province,jdbcType=VARCHAR}, #{college,jdbcType=BIGINT}, #{department,jdbcType=BIGINT}, 
+      #{major,jdbcType=BIGINT}, #{admission,jdbcType=TIMESTAMP}, #{enterprise,jdbcType=BIGINT}, 
+      #{position,jdbcType=VARCHAR}, #{indate,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.match.baciss.model.Worker">
+    insert into worker
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="college != null">
+        college,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="admission != null">
+        admission,
+      </if>
+      <if test="enterprise != null">
+        enterprise,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="indate != null">
+        inDate,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null">
+        #{college,jdbcType=BIGINT},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=BIGINT},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=BIGINT},
+      </if>
+      <if test="admission != null">
+        #{admission,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterprise != null">
+        #{enterprise,jdbcType=BIGINT},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="indate != null">
+        #{indate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.match.baciss.model.Worker">
+    update worker
+    <set>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null">
+        college = #{college,jdbcType=BIGINT},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=BIGINT},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=BIGINT},
+      </if>
+      <if test="admission != null">
+        admission = #{admission,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterprise != null">
+        enterprise = #{enterprise,jdbcType=BIGINT},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="indate != null">
+        inDate = #{indate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.match.baciss.model.Worker">
+    update worker
+    set creator = #{creator,jdbcType=BIGINT},
+      modifier = #{modifier,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=BIGINT},
+      province = #{province,jdbcType=VARCHAR},
+      college = #{college,jdbcType=BIGINT},
+      department = #{department,jdbcType=BIGINT},
+      major = #{major,jdbcType=BIGINT},
+      admission = #{admission,jdbcType=TIMESTAMP},
+      enterprise = #{enterprise,jdbcType=BIGINT},
+      position = #{position,jdbcType=VARCHAR},
+      inDate = #{indate,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

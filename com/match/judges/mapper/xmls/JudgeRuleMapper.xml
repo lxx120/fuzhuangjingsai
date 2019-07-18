@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.judges.mapper.JudgeRuleMapper">
+  <resultMap id="BaseResultMap" type="com.match.judges.model.JudgeRule">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="modifier" jdbcType="BIGINT" property="modifier" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="jrname" jdbcType="VARCHAR" property="jrname" />
+    <result column="score" jdbcType="DOUBLE" property="score" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="valid" jdbcType="INTEGER" property="valid" />
+    <result column="competitionid" jdbcType="BIGINT" property="competitionid" />
+    <result column="divisionid" jdbcType="BIGINT" property="divisionid" />
+    <result column="arid" jdbcType="BIGINT" property="arid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.match.judges.model.JudgeRule">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, creator, modifier, ctime, mtime, jrname, score, weight, valid, competitionid, divisionid, 
+    arid
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from judgerule
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from judgerule
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.match.judges.model.JudgeRule">
+    insert into judgerule (id, creator, modifier, 
+      ctime, mtime, jrname, 
+      score, weight, valid, 
+      competitionid, divisionid, arid, 
+      content)
+    values (#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, #{modifier,jdbcType=BIGINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}, #{jrname,jdbcType=VARCHAR}, 
+      #{score,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE}, #{valid,jdbcType=INTEGER}, 
+      #{competitionid,jdbcType=BIGINT}, #{divisionid,jdbcType=BIGINT}, #{arid,jdbcType=BIGINT}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.match.judges.model.JudgeRule">
+    insert into judgerule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="jrname != null">
+        jrname,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="valid != null">
+        valid,
+      </if>
+      <if test="competitionid != null">
+        competitionid,
+      </if>
+      <if test="divisionid != null">
+        divisionid,
+      </if>
+      <if test="arid != null">
+        arid,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jrname != null">
+        #{jrname,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="competitionid != null">
+        #{competitionid,jdbcType=BIGINT},
+      </if>
+      <if test="divisionid != null">
+        #{divisionid,jdbcType=BIGINT},
+      </if>
+      <if test="arid != null">
+        #{arid,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.match.judges.model.JudgeRule">
+    update judgerule
+    <set>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jrname != null">
+        jrname = #{jrname,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="competitionid != null">
+        competitionid = #{competitionid,jdbcType=BIGINT},
+      </if>
+      <if test="divisionid != null">
+        divisionid = #{divisionid,jdbcType=BIGINT},
+      </if>
+      <if test="arid != null">
+        arid = #{arid,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.match.judges.model.JudgeRule">
+    update judgerule
+    set creator = #{creator,jdbcType=BIGINT},
+      modifier = #{modifier,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      jrname = #{jrname,jdbcType=VARCHAR},
+      score = #{score,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      valid = #{valid,jdbcType=INTEGER},
+      competitionid = #{competitionid,jdbcType=BIGINT},
+      divisionid = #{divisionid,jdbcType=BIGINT},
+      arid = #{arid,jdbcType=BIGINT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.match.judges.model.JudgeRule">
+    update judgerule
+    set creator = #{creator,jdbcType=BIGINT},
+      modifier = #{modifier,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      jrname = #{jrname,jdbcType=VARCHAR},
+      score = #{score,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      valid = #{valid,jdbcType=INTEGER},
+      competitionid = #{competitionid,jdbcType=BIGINT},
+      divisionid = #{divisionid,jdbcType=BIGINT},
+      arid = #{arid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <insert id="insetjudgeRuleList">
+		insert into judgerule (mtime,jrname,score,weight,content,competitionid,divisionid,arid) 
+		values
+		<foreach collection="list" item="item" separator=",">
+			 (#{item.mtime},#{item.jrname,jdbcType=VARCHAR},#{item.score},#{item.weight},#{item.content},#{item.competitionid},#{item.divisionid},#{item.arid})
+		</foreach>
+	</insert>
+</mapper>

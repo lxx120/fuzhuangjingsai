@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.match.org.mapper.ZhengshuloadMapper">
+
+	<insert id="addZhengshu"
+		parameterType="com.match.org.model.Zhengshuload">
+		insert into peizhi
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="type !=0">
+				type,
+			</if>
+			<if test="competitionid != 0">
+				competitionid,
+			</if>
+			<if test="path != null">
+				path,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="type != 0">
+				#{type},
+			</if>
+			<if test="competitionid != 0">
+				#{competitionid},
+			</if>
+			<if test="path != null">
+				#{path},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateZhengshu"
+		parameterType="com.match.org.model.Zhengshuload">
+		update zhengshuload
+		<set>
+			<if test="type != null">
+				type = #{type},
+			</if>
+			<if test="competitionid != 0">
+				competitionid = #{competitionid},
+			</if>
+			<if test="path !=null">
+				path = #{path},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+</mapper>

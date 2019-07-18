@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.match.reviewresult.mapper.PeizhiMapper">
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		peizhi
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="addPeiZhi"
+		parameterType="com.match.reviewresult.model.Peizhi">
+		insert into peizhi
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="pagesize != null">
+				pagesize,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				#{type},
+			</if>
+			<if test="pagesize != null">
+				#{pagesize},
+			</if>
+		</trim>
+	</insert>
+	<update id="updatePeiZhi"
+		parameterType="com.match.reviewresult.model.Peizhi">
+		update peizhi
+		<set>
+			<if test="type != null">
+				type = #{type},
+			</if>
+			<if test="pagesize != null">
+				pagesize = #{pagesize},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+</mapper>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.proposition.mapper.TeamMapper">
+  <resultMap id="BaseResultMap" type="com.match.proposition.model.Team">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="modifier" jdbcType="BIGINT" property="modifier" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="workid" jdbcType="BIGINT" property="workid" />
+    <result column="groupleader" jdbcType="INTEGER" property="groupleader" />
+    <result column="divisionwork" jdbcType="VARCHAR" property="divisionwork" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, creator, modifier, ctime, mtime, name, workid, groupleader, divisionwork, grade, 
+    major
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from team
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from team
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.match.proposition.model.Team">
+    insert into team (id, creator, modifier, 
+      ctime, mtime, name, 
+      workid, groupleader, divisionwork, 
+      grade, major)
+    values (#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, #{modifier,jdbcType=BIGINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, 
+      #{workid,jdbcType=BIGINT}, #{groupleader,jdbcType=INTEGER}, #{divisionwork,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=INTEGER}, #{major,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.match.proposition.model.Team">
+    insert into team
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="workid != null">
+        workid,
+      </if>
+      <if test="groupleader != null">
+        groupleader,
+      </if>
+      <if test="divisionwork != null">
+        divisionwork,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null">
+        #{workid,jdbcType=BIGINT},
+      </if>
+      <if test="groupleader != null">
+        #{groupleader,jdbcType=INTEGER},
+      </if>
+      <if test="divisionwork != null">
+        #{divisionwork,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.match.proposition.model.Team">
+    update team
+    <set>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null">
+        workid = #{workid,jdbcType=BIGINT},
+      </if>
+      <if test="groupleader != null">
+        groupleader = #{groupleader,jdbcType=INTEGER},
+      </if>
+      <if test="divisionwork != null">
+        divisionwork = #{divisionwork,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.match.proposition.model.Team">
+    update team
+    set creator = #{creator,jdbcType=BIGINT},
+      modifier = #{modifier,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      name = #{name,jdbcType=VARCHAR},
+      workid = #{workid,jdbcType=BIGINT},
+      groupleader = #{groupleader,jdbcType=INTEGER},
+      divisionwork = #{divisionwork,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=INTEGER},
+      major = #{major,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <insert id="addBatchTeam">
+    insert into team(mtime,name,workid,groupleader,divisionwork,grade,major,phone)
+    values
+    <foreach collection="list" item="itme" separator=",">
+      (#{itme.mtime},#{itme.name},#{itme.workid},#{itme.groupleader},#{itme.divisionwork},#{itme.grade},#{itme.major},#{itme.phone})
+    </foreach>
+  </insert>
+  
+   <delete id="deleteTeamByWorkid" parameterType="java.lang.Long">
+    delete from team
+    where workid = #{workid,jdbcType=BIGINT}
+  </delete>
+  
+
+  
+  
+  
+  
+  
+</mapper>

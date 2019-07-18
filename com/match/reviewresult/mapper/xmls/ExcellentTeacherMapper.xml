@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.match.reviewresult.mapper.ExcellentTeacherMapper">
+	<resultMap id="BaseResultMap"
+		type="com.match.reviewresult.model.ExcellentTeacher">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="creator" jdbcType="BIGINT" property="creator" />
+		<result column="modifier" jdbcType="BIGINT" property="modifier" />
+		<result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+		<result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+		<result column="competationid" jdbcType="BIGINT"
+			property="competationid" />
+		<result column="divisionid" jdbcType="BIGINT"
+			property="divisionid" />
+		<result column="totalcsore" jdbcType="DOUBLE"
+			property="totalcsore" />
+		<result column="ranking" jdbcType="INTEGER" property="ranking" />
+		<result column="teacherid" jdbcType="BIGINT"
+			property="teacherid" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, creator, modifier, ctime, mtime, competationid,
+		divisionid,
+		totalcsore, ranking,
+		teacherid
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from excellentteacher
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		excellentteacher
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"
+		parameterType="com.match.reviewresult.model.ExcellentTeacher">
+		insert into excellentteacher (id, creator, modifier,
+		ctime, mtime, competationid,
+		divisionid, totalcsore, ranking,
+		teacherid)
+		values (#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT},
+		#{modifier,jdbcType=BIGINT},
+		#{ctime,jdbcType=TIMESTAMP},
+		#{mtime,jdbcType=TIMESTAMP}, #{competationid,jdbcType=BIGINT},
+		#{divisionid,jdbcType=BIGINT}, #{totalcsore,jdbcType=DOUBLE},
+		#{ranking,jdbcType=INTEGER},
+		#{teacherid,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.match.reviewresult.model.ExcellentTeacher">
+		insert into excellentteacher
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="modifier != null">
+				modifier,
+			</if>
+			<if test="ctime != null">
+				ctime,
+			</if>
+			<if test="mtime != null">
+				mtime,
+			</if>
+			<if test="competationid != null">
+				competationid,
+			</if>
+			<if test="divisionid != null">
+				divisionid,
+			</if>
+			<if test="totalcsore != null">
+				totalcsore,
+			</if>
+			<if test="ranking != null">
+				ranking,
+			</if>
+			<if test="teacherid != null">
+				teacherid,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=BIGINT},
+			</if>
+			<if test="modifier != null">
+				#{modifier,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				#{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				#{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="competationid != null">
+				#{competationid,jdbcType=BIGINT},
+			</if>
+			<if test="divisionid != null">
+				#{divisionid,jdbcType=BIGINT},
+			</if>
+			<if test="totalcsore != null">
+				#{totalcsore,jdbcType=DOUBLE},
+			</if>
+			<if test="ranking != null">
+				#{ranking,jdbcType=INTEGER},
+			</if>
+			<if test="teacherid != null">
+				#{teacherid,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				#{type},
+			</if>
+			<if test="phone != null">
+				#{phone},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.match.reviewresult.model.ExcellentTeacher">
+		update excellentteacher
+		<set>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=BIGINT},
+			</if>
+			<if test="modifier != null">
+				modifier = #{modifier,jdbcType=BIGINT},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="competationid != null">
+				competationid = #{competationid,jdbcType=BIGINT},
+			</if>
+			<if test="divisionid != null">
+				divisionid = #{divisionid,jdbcType=BIGINT},
+			</if>
+			<if test="totalcsore != null">
+				totalcsore = #{totalcsore,jdbcType=DOUBLE},
+			</if>
+			<if test="ranking != null">
+				ranking = #{ranking,jdbcType=INTEGER},
+			</if>
+			<if test="teacherid != null">
+				teacherid = #{teacherid,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				type = #{type},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.match.reviewresult.model.ExcellentTeacher">
+		update excellentteacher
+		set creator =
+		#{creator,jdbcType=BIGINT},
+		modifier = #{modifier,jdbcType=BIGINT},
+		ctime = #{ctime,jdbcType=TIMESTAMP},
+		mtime =
+		#{mtime,jdbcType=TIMESTAMP},
+		competationid =
+		#{competationid,jdbcType=BIGINT},
+		divisionid =
+		#{divisionid,jdbcType=BIGINT},
+		totalcsore =
+		#{totalcsore,jdbcType=DOUBLE},
+		ranking = #{ranking,jdbcType=INTEGER},
+		teacherid = #{teacherid,jdbcType=BIGINT}
+		where id =
+		#{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="findExcellentTeacher" parameterType="Map"
+		resultType="Map">
+		SELECT
+		b.`realName`,
+		b.`phone`,
+		a.`position`,
+		d.`dename`,
+		c.`name` AS collegename,
+		e.`id`,e.`teacherid`,e.`type`
+		FROM
+		`excellentteacher` e
+		LEFT JOIN USER b
+		ON e.phone = b.phone
+		LEFT JOIN
+		teacher a ON b.id=a.userid
+		LEFT JOIN college c
+		ON a.`college` = c.`id`
+		LEFT JOIN `department` d
+		ON
+		a.`department` = d.`id`
+		limit ${page},#{pagesize}
+	</select>
+
+	<select id="countfindExcellentTeacher" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		`excellentteacher` e
+		LEFT JOIN USER b
+		ON e.phone = b.phone
+		LEFT JOIN
+		teacher a ON b.id=a.userid
+		LEFT JOIN college c
+		ON a.`college` = c.`id`
+		LEFT JOIN `department` d
+		ON
+		a.`department` = d.`id`
+	</select>
+
+
+	<insert id="addbatchExcellentTeacher">
+		insert into excellentteacher
+		(mtime,competationid,phone,totalcsore,ranking,type)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.mtime}, #{item.competationid},
+			#{item.phone}, #{item.totalcsore}, #{item.ranking},#{item.type})
+		</foreach>
+	</insert>
+
+	<select id="findAllTeacherScore" resultType="Map">
+		SELECT
+		b.`realName`,
+		b.`phone`,
+		IFNULL(c.`score`, 0) AS score,
+		d.`name`,
+		a.`position`
+		FROM
+		teacher a
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN `teacherscore` c
+		ON b.`phone` = c.`phone`
+		LEFT JOIN college d
+		ON a.`college` = d.`id`
+		WHERE c.`competationid`=#{competitionid}
+		<if test="collegeid !=0">
+		and d.id=#{collegeid}
+		</if>
+		order by c.score desc
+	</select>
+	<select id="findAllTeacherScorePage" resultType="Map">
+		SELECT
+		b.`realName`,
+		b.`phone`,
+		IFNULL(c.`score`, 0) AS score,
+		d.`name`,
+		a.`position`
+		FROM
+		teacher a
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN `teacherscore` c
+		ON b.`phone` = c.`phone`
+		LEFT JOIN college d
+		ON a.`college` = d.`id`
+		WHERE c.`competationid`=#{competitionid}
+		<if test="collegeid !=0">
+		and d.id=#{collegeid}
+		</if>
+		order by c.score desc
+		limit ${page},#{pagesize}
+	</select>
+	<select id="countfindAllTeacherScorePage" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		teacher a
+		LEFT JOIN USER b
+		ON a.`userid` = b.`id`
+		LEFT JOIN `teacherscore` c
+		ON b.`phone` = c.`phone`
+		LEFT JOIN college d
+		ON a.`college` = d.`id`
+		WHERE c.`competationid`=#{competitionid}
+		<if test="collegeid !=0">
+		and d.id=#{collegeid}
+		</if>
+	</select>
+</mapper>

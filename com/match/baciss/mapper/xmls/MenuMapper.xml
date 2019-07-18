@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match.baciss.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.match.baciss.model.Menu">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="modifier" jdbcType="BIGINT" property="modifier" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="lft" jdbcType="INTEGER" property="lft" />
+    <result column="rgt" jdbcType="INTEGER" property="rgt" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="ordering" jdbcType="INTEGER" property="ordering" />
+    <result column="authenObj" jdbcType="BIGINT" property="authenobj" />
+    <result column="authenOper" jdbcType="BIGINT" property="authenoper" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, creator, modifier, ctime, mtime, title, url, icon, pid, lft, rgt, level, ordering, 
+    authenObj, authenOper
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from menu
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from menu
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.match.baciss.model.Menu">
+    insert into menu (id, creator, modifier, 
+      ctime, mtime, title, 
+      url, icon, pid, lft, 
+      rgt, level, ordering, 
+      authenObj, authenOper)
+    values (#{id,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, #{modifier,jdbcType=BIGINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{lft,jdbcType=INTEGER}, 
+      #{rgt,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, #{ordering,jdbcType=INTEGER}, 
+      #{authenobj,jdbcType=BIGINT}, #{authenoper,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.match.baciss.model.Menu">
+    insert into menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="lft != null">
+        lft,
+      </if>
+      <if test="rgt != null">
+        rgt,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="ordering != null">
+        ordering,
+      </if>
+      <if test="authenobj != null">
+        authenObj,
+      </if>
+      <if test="authenoper != null">
+        authenOper,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="lft != null">
+        #{lft,jdbcType=INTEGER},
+      </if>
+      <if test="rgt != null">
+        #{rgt,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="ordering != null">
+        #{ordering,jdbcType=INTEGER},
+      </if>
+      <if test="authenobj != null">
+        #{authenobj,jdbcType=BIGINT},
+      </if>
+      <if test="authenoper != null">
+        #{authenoper,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.match.baciss.model.Menu">
+    update menu
+    <set>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="lft != null">
+        lft = #{lft,jdbcType=INTEGER},
+      </if>
+      <if test="rgt != null">
+        rgt = #{rgt,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="ordering != null">
+        ordering = #{ordering,jdbcType=INTEGER},
+      </if>
+      <if test="authenobj != null">
+        authenObj = #{authenobj,jdbcType=BIGINT},
+      </if>
+      <if test="authenoper != null">
+        authenOper = #{authenoper,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.match.baciss.model.Menu">
+    update menu
+    set creator = #{creator,jdbcType=BIGINT},
+      modifier = #{modifier,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=BIGINT},
+      lft = #{lft,jdbcType=INTEGER},
+      rgt = #{rgt,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      ordering = #{ordering,jdbcType=INTEGER},
+      authenObj = #{authenobj,jdbcType=BIGINT},
+      authenOper = #{authenoper,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
